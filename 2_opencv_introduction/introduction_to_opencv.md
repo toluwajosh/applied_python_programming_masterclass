@@ -63,9 +63,23 @@ if k == ord("s"):
     cv.imwrite(image_save_path, img)
 ```
 
+We can save the image in [grayscale](https://whatis.techtarget.com/definition/grayscale) by adding the following line of code.
+
+```python
+if k == ord("s"):
+    image_save_path = "starry_night_saved.png"
+    image_gray = cv.cvt
+    cv.imwrite(image_save_path, img)
+```
+
+Now if you open the saved image in your directory, it should be a grayscale image.
+
+> Grayscale is a range of shades of gray without apparent color. The darkest possible shade is black, which is the total absence of transmitted or reflected light. The lightest possible shade is white, the total transmission or reflection of light at all visible wavelength s. Intermediate shades of gray are represented by equal brightness levels of the three primary colors (red, green and blue) for transmitted light, or equal amounts of the three primary pigments (cyan, magenta and yellow) for reflected light.
+
 
 
 ## Bibiliography
 
 1. OpenCV Documentation - https://docs.opencv.org/4.3.0/d1/dfb/intro.html
 2. [Dana H. Ballard; Christopher M. Brown (1982). Computer Vision. Prentice Hall. ISBN 978-0-13-165316-0.](https://www.e-booksdirectory.com/details.php?ebook=1124)
+3. Grayscale - https://whatis.techtarget.com/definition/grayscale

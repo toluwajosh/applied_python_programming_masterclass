@@ -19,4 +19,8 @@ k = cv.waitKey(0)
 # if the user presses the 's' key, save the image, using cv.imwrite
 if k == ord("s"):
     image_save_path = "starry_night_saved.png"
-    cv.imwrite(image_save_path, img)
+    # we convert the image to another color format 
+    # by using the `cv.cvtColor` function
+    # We choose the grayscale format by using the `cv.COLOR_BGR2GRAY` object.
+    image_gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+    cv.imwrite(image_save_path, image_gray)
