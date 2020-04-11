@@ -1,26 +1,28 @@
 # import needed libraries
-import cv2 as cv  # we shorten cv2 as cv
+import cv2 # import opencv
 import sys
 
-# read the image, using cv.imread
+# read the image, using cv2.imread
 path_to_image = "starry_night.jpg"  # path to the image
-img = cv.imread(cv.samples.findFile(path_to_image))
+img = cv2.imread(cv2.samples.findFile(path_to_image))
 
 # in case we cannot read the image
 if img is None:
     sys.exit("Could not read the image.")
 
+image_gray = cv2.cvtColor(img, cv2.COLOR_BGR2Lab)
+
 # if image is read successfully display the image
-cv.imshow("Display window", img)
+cv2.imshow("Display window", image_gray)
 
 # pause the image display until the user presses a key
-k = cv.waitKey(0)
+k = cv2.waitKey(0)
 
-# if the user presses the 's' key, save the image, using cv.imwrite
+# if the user presses the 's' key, save the image, using cv2.imwrite
 if k == ord("s"):
     image_save_path = "starry_night_saved.png"
     # we convert the image to another color format 
-    # by using the `cv.cvtColor` function
-    # We choose the grayscale format by using the `cv.COLOR_BGR2GRAY` object.
-    image_gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-    cv.imwrite(image_save_path, image_gray)
+    # by using the `cv2.cvtColor` function
+    # We choose the grayscale format by using the `cv2.COLOR_BGR2GRAY` object.
+    
+    cv2.imwrite(image_save_path, image_gray)
