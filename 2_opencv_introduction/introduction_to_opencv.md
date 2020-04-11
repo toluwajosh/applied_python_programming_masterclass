@@ -5,7 +5,20 @@ OpenCV (Open Source Computer Vision Library) is an [open-source](https://en.wiki
 > Note: If something is not clear or you need a deeper explanation of a concept. Please do not hesitate to request for the topic so that it can be added to instruction material.
 
 
+## What is Computer Vision?
 
+Computer vision is a field of science that deals with how computers can gain high-level understnading from digital images or videos. This field aims to understand and automate the tasks that the human visual system can do. Computer vision tasks includes but are not limited to the following;
+
+1. Image processing
+2. Scene reconstruction
+4. Object recognition
+5. Object tracking
+6. 3D pose estimation
+7. Learning
+8. Indexing
+9. Motion estimation
+10. 3D scene modeling
+11. 
 
 
 ## Bibiliography
