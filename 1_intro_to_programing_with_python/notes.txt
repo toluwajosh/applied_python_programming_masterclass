@@ -1,0 +1,48 @@
+# Notes
+
+Programming telling a computer exactly what to do in a step by step layout of instructions.
+With suitable Programming, each computer can basically do all the things that any other computer can do.
+
+Reasons to learn programming
+Programming makes you be in control of your computer
+Programming can be a fun hobby
+Programming helps to develop valuabe problem solving skills such as the ability to analyze complex systems by reducing them to interactions of understandable subsystems
+Programming is a lucrative career option
+Programming gives you an edge regardless of your occupation
+
+Algorithm is a step-be-step process of acheiving a desired result.
+
+Three main techniques in computer science; design, analysis and experimentation
+
+Analysis is the process of examining algorithms and problems mathematically.
+
+Some probems are too complex or ill-defined to lend themselves to analysis. In such cases, computer scientists rely on experimentation; they actually implement systems and then study the resulting behaviour.
+
+Functional view of a computer: [input devices]>[[cpu]<>[main memory]]>[output devices]-<>[secondary memory]
+
+Some examples of general computing; networking, human-computer interaction, AI, software engineering, web and multimedia design, management informaition systems, and computer security.
+
+Programming Languages:
+A code for writing down the instructions that a computer will follow. The process of writing an algorithm in a programming language si called coding.
+
+A high level language can either be compiled or interpreted
+
+
+
+
+
+
+
+## Outline from Introduction to Computer Science and Programming Using Python (edX course)
+
+Algorithms
+Functions
+Recursion
+Objects
+Debugging
+Assertionsa and Exceptions
+Efficiecy and orders of growth
+Memory and search
+Classes
+Object Oriented Programming
+Trees

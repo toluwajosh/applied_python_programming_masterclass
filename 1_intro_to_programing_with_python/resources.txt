@@ -1,0 +1,4 @@
+Resources:
+
+Book recommendations:
+  https://stackabuse.com/the-best-python-books-for-all-skill-levels/
