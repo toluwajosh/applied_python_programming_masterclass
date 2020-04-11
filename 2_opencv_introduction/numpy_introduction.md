@@ -1,0 +1,102 @@
+# Introduction to Numpy
+
+Images are basically multidimensional arrays. If you check the properties of an image in your explorer, you will see something like; dimensions `800x600`, or width `800` height `600`. This means that this image has `800x600` pixels. And for a coloured image, that would be `800x600x3` because of the `3` colour channels. 
+
+**Numpy** is the core library for scientific computing in Python. It provides a high-performance multidimensional array object, and tools for working with these arrays. In our applications, we will usually use Numpy together with OpenCV.
+
+## Arrays
+
+A numpy array is a grid of values, all of the same type, and is indexed by a tuple of nonnegative integers. We can create arrays with Numpy as follows:
+
+```python
+import numpy as np # we shorten the name
+
+# create a rank 1 array
+# The number of dimensions is the rank of the array
+a = np.array([1,2,3])
+
+# create a rank 2 array
+b = np.array([1,2,3], [4,5,6]) # note the difference from the first array
+
+```
+
+We can know the shape of the arrays by doing;
+
+```python
+>>> a.shape
+(3,)
+>>> b.shape
+(2,3)
+```
+
+There are special functions to create arrays
+
+```python
+# create an array of all zeros
+a = np.zeors((2,2))
+
+# create an array of all ones
+b = np.ones((2,2))
+
+# create an array of random values
+c = np.random.random((2,2))
+```
+
+### Datatypes
+
+Every numpy array is a grid of elements of the same type. Numpy provides a large set of numeric datatypes that you can use to construct arrays. Numpy tries to guess a datatype when you create an array, but functions that construct arrays usually also include an optional argument to explicitly specify the datatype. Here are examples:
+
+```python
+import numpy as np
+
+x = np.array([1, 2])   # Numpy chooses an integer dataatype
+
+x = np.array([1.0, 2.0])   # Numpy chooses a float datatype
+
+# Force a particular datatype: np.int64
+x = np.array([1, 2], dtype=np.int64)
+```
+You can see [more Numpy datatypes here](https://docs.scipy.org/doc/numpy/reference/arrays.dtypes.html).
+
+
+### Array Math
+
+Basic mathematical functions operate elementwise on arrays:
+
+```python
+import numpy as np
+
+x = np.array([[1,2],[3,4]], dtype=np.float64)
+y = np.array([[5,6],[7,8]], dtype=np.float64)
+
+# sum of two arrays
+print(x + y)
+print(np.add)
+
+# difference between two arrays
+print(x - y)
+print(np.subtract(x, y))
+
+# product of two arrays
+print(x * y)
+print(np.multiply(x, y))
+
+# division
+print(x / y)
+print(np.divide(x, y))
+
+# square root
+print(np.sqrt(x))
+```
+
+## Basic Image Manipulations
+
+Now we will use our knowledge of OpenCV and Numpy libraries to perform operations such as cropping, flipping, resizing, brightening and darkening of images, and image masking.
+
+
+### Image masking
+
+## Bibliography
+
+1. Numpy documentation - https://docs.scipy.org/doc/numpy/reference/index.html
+2. CS231n: Convolutional Neural Networks for Visual Recognition, Python Numpy Tutorial - https://cs231n.github.io/python-numpy-tutorial/
