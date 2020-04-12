@@ -171,8 +171,8 @@ image = cv2.imread("starry_night.jpg")
 # by using np.zeros_like
 zeros_image = np.zeros_like(image)
 height, width = zeros_image.shape
-# turn 200x200 square in the middle of the zeros_image to one
 
+# change 200x200 square in the middle of the zeros_image to one
 zeros_image[height//2-100:height//2+100, width//2-100:width//2+100] = 1
 
 # we now mask the input image by

@@ -2,10 +2,15 @@
 
 Manipulations that need some level of mathematics
 
-## Perspective Transform
+## Edge Detection
 
-https://circuitdigest.com/tutorial/image-manipulation-in-python-opencv-part2
+
+## Image blurring and sharpening
+
 
 ## Image Thresholding
 
-## Image blurring and sharpening
+
+## Perspective Transform
+
+https://circuitdigest.com/tutorial/image-manipulation-in-python-opencv-part2
