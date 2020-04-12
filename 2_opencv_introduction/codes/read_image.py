@@ -1,6 +1,7 @@
 # import needed libraries
 import cv2 # import opencv
 import sys
+import numpy as np
 
 # read the image, using cv2.imread
 path_to_image = "starry_night.jpg"  # path to the image
@@ -11,6 +12,8 @@ if img is None:
     sys.exit("Could not read the image.")
 
 image_gray = cv2.cvtColor(img, cv2.COLOR_BGR2Lab)
+
+image_gray = np.fliplr(image_gray)
 
 # if image is read successfully display the image
 cv2.imshow("Display window", image_gray)

@@ -91,7 +91,52 @@ print(np.sqrt(x))
 
 ## Basic Image Manipulations
 
-Now we will use our knowledge of OpenCV and Numpy libraries to perform operations such as cropping, flipping, resizing, brightening and darkening of images, and image masking.
+Now we will use our knowledge of OpenCV and Numpy libraries to perform operations such as cropping, flipping, resizing, brightening and darkening of images, and image masking. We will provide the codes to perform these operations and explanation in the code comments.
+
+### Image Cropping
+
+This referrers extracting a region of interest from an input image.
+
+```python
+import cv2
+
+# read the image
+image = cv2.imread("starry_night.jpg")
+
+# obtain the shape of the image
+# height, width, channels = image.shape
+
+# we do not need channels so we can do instead
+# height, width = image.shape[:2]
+
+# to crop we specify the start and the end of the index 
+# in the ros and column
+cropped = image[10:110, 10:110]
+```
+
+### Image flipping
+
+This refers to flipping the array in left/right or up/down direction.
+
+```python
+import cv2
+import numpy as np
+
+# read the image
+image = cv2.imread("starry_night.jpg")
+
+# we can flip the image left/right using numpy's `fliplr`
+image_flipped_lr = np.fliplr(image)
+
+# we can flip the image up/down using numpy's `flipud`
+image_flipped_ud = np.flipud(image)
+
+```
+
+## Image resizing
+
+This refers to changing the size of an image to a new size
+
 
 
 ### Image masking
