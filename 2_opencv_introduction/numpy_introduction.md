@@ -133,13 +133,52 @@ image_flipped_ud = np.flipud(image)
 
 ```
 
-## Image resizing
+## Image brightening and darkening
 
-This refers to changing the size of an image to a new size
+In OpenCV, adding or subtracting matrixes has effect on increasing or decreasing of brightness.
 
+```python
+import cv2
+import numpy as np
 
+# read the image
+image = cv2.imread("starry_night.jpg")
+
+# create a matrix of one's, then multiply it by a scaler of 100'
+# np.ones gives a matrix with same dimension as of our image with all the values being 100 in this case
+M = np.ones(image.shape, dtype=np.uint8) * 100
+# np.unint8 is another data type in numpy. It means 8 bit unsigned integer
+# the matrix M is added to our image
+bright_image = cv2.add(image, M)
+
+# subtracting the matrix creates a dark image
+dark_image = cv2.subtract(image, M)
+```
 
 ### Image masking
+
+This refers to the process of hiding some portions of an image. This is useful in tasks such as background removal. Here we will only create a simple square masking. However, the idea is the same for other tasks.
+
+```python
+import cv2
+import numpy as np
+
+# read the image
+image = cv2.imread("starry_night.jpg")
+
+# create another array of zeros
+# with the same shape as the input image
+# by using np.zeros_like
+zeros_image = np.zeros_like(image)
+height, width = zeros_image.shape
+# turn 200x200 square in the middle of the zeros_image to one
+
+zeros_image[height//2-100:height//2+100, width//2-100:width//2+100] = 1
+
+# we now mask the input image by
+# multiplying the zeros_image and the input image
+masked_image = image * zeros_image
+```
 
 ## Bibliography
 

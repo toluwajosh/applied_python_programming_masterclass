@@ -15,6 +15,7 @@ image_gray = cv2.cvtColor(img, cv2.COLOR_BGR2Lab)
 
 image_gray = np.fliplr(image_gray)
 
+
 # if image is read successfully display the image
 cv2.imshow("Display window", image_gray)
 
