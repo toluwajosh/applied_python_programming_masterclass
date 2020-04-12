@@ -13,4 +13,8 @@ Manipulations that need some level of mathematics
 
 ## Perspective Transform
 
+
+## Bibliography
+
 https://circuitdigest.com/tutorial/image-manipulation-in-python-opencv-part2
+https://www.pyimagesearch.com/2014/01/20/basic-image-manipulations-in-python-and-opencv-resizing-scaling-rotating-and-cropping/
