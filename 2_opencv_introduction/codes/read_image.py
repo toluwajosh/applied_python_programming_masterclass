@@ -15,9 +15,11 @@ image_gray = cv2.cvtColor(img, cv2.COLOR_BGR2Lab)
 
 image_gray = np.fliplr(image_gray)
 
+edges = cv2.Canny(image_gray, threshold1=100, threshold2=200)
+
 
 # if image is read successfully display the image
-cv2.imshow("Display window", image_gray)
+cv2.imshow("Display window", edges)
 
 # pause the image display until the user presses a key
 k = cv2.waitKey(0)

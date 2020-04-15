@@ -1,3 +1,5 @@
 *.html
 .vscode/
 *.pdf
+*.avi
+*.mp4
