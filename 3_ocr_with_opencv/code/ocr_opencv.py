@@ -4,8 +4,9 @@ ocr script
 
 import cv2
 import numpy as np
+from east_text_detector import east_detector
 
-input_image = cv2.imread("afam_paper.jpg")
+input_image = cv2.imread("lazy_sheet.jpg")
 gray_image = cv2.cvtColor(input_image, cv2.COLOR_RGB2GRAY)
 
 # detect paper edges
@@ -57,6 +58,28 @@ print(paper_corners)
 
 transform_matrix = cv2.getPerspectiveTransform(paper_corners, new_corners)
 warped_image = cv2.warpPerspective(input_image, transform_matrix, (540, 720))
+
+# detect text bounding boxes
+boxes = east_detector(warped_image)
+(H, W) = warped_image.shape[:2]
+
+# set the new width and height and then determine the ratio in change
+# for both the width and height
+(newW, newH) = (640, 640)
+rW = W / float(newW)
+rH = H / float(newH)
+
+# loop over the bounding boxes
+for (startX, startY, endX, endY) in boxes:
+    # scale the bounding box coordinates based on the respective
+    # ratios
+    startX = int(startX * rW)
+    startY = int(startY * rH)
+    endX = int(endX * rW)
+    endY = int(endY * rH)
+
+    # draw the bounding box on the image
+    cv2.rectangle(warped_image, (startX, startY), (endX, endY), (0, 255, 0), 2)
 
 
 cv2.imshow("display", input_image)
