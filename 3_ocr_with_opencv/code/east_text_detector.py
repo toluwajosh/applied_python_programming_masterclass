@@ -118,7 +118,7 @@ def east_detector(
     # apply non-maxima suppression to suppress weak, overlapping bounding
     # boxes
     boxes = non_max_suppression(np.array(rects), probs=confidences)
-    return boxes
+    return boxes, confidences
 
 
 if __name__ == "__main__":
