@@ -13,6 +13,8 @@ To solve the OCR problem, we have to do the following
 5. Recognize individual characters in the text regions
 6. Output the recognized text in a readable order.
 
+Due to the length of the code used for this purpose. The code will be supplied in a different file.
+
 ## Bibliography
 
 1. Pyimagesearch, OCR - https://www.pyimagesearch.com/category/optical-character-recognition-ocr/
