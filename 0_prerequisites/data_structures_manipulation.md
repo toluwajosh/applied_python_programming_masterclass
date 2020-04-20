@@ -1,6 +1,6 @@
 # Python Programming Essentials - Data Structures and Manipulation
 
-In this post, we are going to look a little deeper in how to manipulate the different data structures we have seen so far in Python programming. Those are `Lists` and `Dictionaries`. More importantly, we will look at the built-in functions for each class and use this knowledge to solve a very common technical problem.
+In this section, we are going to look a little deeper in how to manipulate the different data structures we have seen so far in Python programming. Those are `Lists` and `Dictionaries`. More importantly, we will look at the built-in functions for each class and use this knowledge to solve a very common technical problem.
 
 ## Outline
 

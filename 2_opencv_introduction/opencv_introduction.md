@@ -1,6 +1,6 @@
 # Introduction to OpenCV
 
-OpenCV (Open Source Computer Vision Library) is an [open-source](https://en.wikipedia.org/wiki/Open_source) library that includes several hundreds of computer vision library. OpenCV was built to provide a common infrastructure for computer vision applications and to accelerate the use of machine perception in the commercial products. Since OpenCV is a collection of libraries for computer vision, it is necessary that we understand some computer vision concepts. We will only explain concepts that are used in this class. Please feel free to read about other concepts or theories that interest you.
+OpenCV (Open Source Computer Vision Library) is an [open-source](https://en.wikipedia.org/wiki/Open_source) library that includes several hundreds of computer vision library. OpenCV was built to provide a common infrastructure for computer vision applications and to accelerate the use of machine perception in the commercial products. Since OpenCV is a collection of libraries for computer vision, it is necessary that we understand some computer vision concepts. However, we will only be concerned about concepts that are used in this class. Please feel free to read about other concepts or theories that interest you.
 
 > Note: If any subject is not clear or you need a deeper explanation of a concept. Please do not hesitate to request for the topic so that it can be added to instruction material.
 
@@ -23,13 +23,14 @@ The field of computer vision is very broad, furthermore the scope of this class 
 
 ### Installing OpenCV as a package
 
-At this stage you should have installed Python, VSCode. Use the following steps to install OpenCV.
+At this stage you should have [installed Python](https://youtu.be/MZsdGUsPzuE) through  [VSCode](https://code.visualstudio.com/) and [Anaconda](https://www.anaconda.com/). Follow the steps below to install OpenCV.
 
 1. Open the terminal or command line in VSCode.
    - You can use `ctrl + shift + @` for this, or click the `View` menu, then, `Terminal`.
 2. Install OpenCV package
    - Type `pip install opencv-python`. This installs the package so that you can use it in your python program.
-   - > We will talk about Pip in a later section.
+
+> [Pip](https://pypi.org/project/pip/) is the *de facto* package installer for Python. Like `Anaconda` you can also use pip to install packages written in python.
 
 ## Basic Operations in OpenCV
 
@@ -83,6 +84,10 @@ if k == ord("s"):
 Now if you open the saved image in your directory, it should be a grayscale image. The RGB (Red, Green, Blue) color space is perhaps the most well known color space in computer vision. It seem to be more natural to humans and easy to understand. There are many other color spaces but for most applications, RGB is sufficient.
 
 > **RGB color space** or RGB color system, constructs all the colors from the combination of the Red, Green and Blue colors. As a result, it is referred to has having 3 channels. Conversely, a grayscale image has only 1 channel.
+
+|           Color Image            |            Grayscale Image             |
+| :------------------------------: | :------------------------------------: |
+| ![color](codes/starry_night.jpg) | ![color](codes/starry_night_saved.png) |
 
 <!-- page break -->
 <!-- <div style="page-break-after: always;"></div> -->

@@ -35,3 +35,4 @@ To ascertain uniformity in experience for all students, the following are prefer
 
 If you do not have this set up yet, watch the video on [Getting Started in Python with VSCode and Anaconda](https://youtu.be/MZsdGUsPzuE), Note that you can use any tool you prefer, however, we will only be able to provide support if you use the recommended tools.
 
+<!-- This gives general information about this class and the things you need to do to get fully started. Download the instruction material in the link below. -->

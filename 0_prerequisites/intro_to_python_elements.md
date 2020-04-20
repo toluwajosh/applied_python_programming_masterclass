@@ -1,35 +1,9 @@
-# Introduction to Programming using Python
-
-Introduction to Programming using Python
-
-## Outline
-
-- Writing simple programs (introduction to elements of a python program)
-  - Printing
-  - Comments
-  - Strings
-  - Variables
-  - Arithmetic Operations
-  - Booleans
-- Iterables
-  - list
-  - tuples
-  - strings as iterables
-- Control Structures
-  - If/else/elif
-  - For Loops
-  - While Loops
-- Data Structures Introduction (Dictionaries)
-- Using Functions
+# Introduction to Python Elements
 
 <!-- page break -->
-<div style="page-break-after: always;"></div>
+<!-- <div style="page-break-after: always;"></div> -->
 
-## Python Programming Essentials - Part 1
-
-### [Python Interactive Environment](https://docs.microsoft.com/en-us/visualstudio/python/python-interactive-repl-in-visual-studio?view=vs-2019)
-
-In this tutorial, we are going to be using the python interactive environment, through the command line. The Interactive environment lets you enter arbitrary Python code and see immediate results. This way of coding helps you learn and experiment with APIs and libraries, and to interactively develop working code to include in your projects. This is a very great feature of the python programming language. In VScode, we will access this by typing `python` in the terminal at the bottom of the window.
+In this section, we will learn about basic elements in python programming, that is the bits and pieces that make up the language and makes it easy for beginners. To do this, we are going to be using [the python interactive environment](https://docs.microsoft.com/en-us/visualstudio/python/python-interactive-repl-in-visual-studio?view=vs-2019), through the command line. The Interactive environment lets you enter arbitrary Python code and see immediate results. This way of coding helps you learn and experiment with [functions](#introduction-to-functions) and libraries, and to interactively develop working code to include in your projects. This is a very great feature of the python programming language. In VScode, we will access this by typing `python` in the terminal at the bottom of the window.
 
 ### Printing
 

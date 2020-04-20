@@ -11,9 +11,9 @@ img = cv2.imread(cv2.samples.findFile(path_to_image))
 if img is None:
     sys.exit("Could not read the image.")
 
-image_gray = cv2.cvtColor(img, cv2.COLOR_BGR2Lab)
+image_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-image_gray = np.fliplr(image_gray)
+# image_gray = np.fliplr(image_gray)
 
 edges = cv2.Canny(image_gray, threshold1=100, threshold2=200)
 
