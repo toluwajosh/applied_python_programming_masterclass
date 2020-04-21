@@ -25,6 +25,11 @@ edges = cv2.Canny(gray_image, threshold1=100, threshold2=200)
 
 ```
 
+|              Original Image               |              Canny Edges               |
+| :-------------------------------------: | :-----------------------------------: |
+| ![color](codes/messi.jpg) | ![color](codes/messi_canny_edges.png) |
+
+
 ## Image blurring and sharpening
 
 The blur, or smoothing, of an image removes "outlier" pixels that may be noise in the image. This is a common operation we need to perform before other tasks such as edge detection. There are several blurring functions in OpenCV, such as ['normal' blur](https://docs.opencv.org/2.4/doc/tutorials/imgproc/gausian_median_blur_bilateral_filter/gausian_median_blur_bilateral_filter.html#normalized-box-filter) - `cv2.blur`, [Gaussian blur](https://docs.opencv.org/2.4/doc/tutorials/imgproc/gausian_median_blur_bilateral_filter/gausian_median_blur_bilateral_filter.html#gaussian-filter) - `cv2.GaussianBlur` and the [Median blur](https://docs.opencv.org/2.4/doc/tutorials/imgproc/gausian_median_blur_bilateral_filter/gausian_median_blur_bilateral_filter.html#median-filter) - `cv2.medianBlur`. To apply the blurring, we need to specify the size of the `filter`. Here we use `3 x 3` for a square filter.
