@@ -25,18 +25,22 @@ edges = cv2.Canny(gray_image, threshold1=100, threshold2=200)
 
 ```
 
-|              Original Image               |              Canny Edges               |
-| :-------------------------------------: | :-----------------------------------: |
+|      Original Image       |              Canny Edges              |
+| :-----------------------: | :-----------------------------------: |
 | ![color](codes/messi.jpg) | ![color](codes/messi_canny_edges.png) |
 
 
-## Image blurring and sharpening
+## Image blurring
 
-The blur, or smoothing, of an image removes "outlier" pixels that may be noise in the image. This is a common operation we need to perform before other tasks such as edge detection. There are several blurring functions in OpenCV, such as ['normal' blur](https://docs.opencv.org/2.4/doc/tutorials/imgproc/gausian_median_blur_bilateral_filter/gausian_median_blur_bilateral_filter.html#normalized-box-filter) - `cv2.blur`, [Gaussian blur](https://docs.opencv.org/2.4/doc/tutorials/imgproc/gausian_median_blur_bilateral_filter/gausian_median_blur_bilateral_filter.html#gaussian-filter) - `cv2.GaussianBlur` and the [Median blur](https://docs.opencv.org/2.4/doc/tutorials/imgproc/gausian_median_blur_bilateral_filter/gausian_median_blur_bilateral_filter.html#median-filter) - `cv2.medianBlur`. To apply the blurring, we need to specify the size of the `filter`. Here we use `3 x 3` for a square filter.
+The blur, or smoothing, of an image removes "outlier" pixels that may be noise in the image. This is a common operation we need to perform before other tasks such as edge detection. There are several blurring functions in OpenCV, such as ['normal' blur](https://docs.opencv.org/2.4/doc/tutorials/imgproc/gausian_median_blur_bilateral_filter/gausian_median_blur_bilateral_filter.html#normalized-box-filter) - `cv2.blur`, [Gaussian blur](https://docs.opencv.org/2.4/doc/tutorials/imgproc/gausian_median_blur_bilateral_filter/gausian_median_blur_bilateral_filter.html#gaussian-filter) - `cv2.GaussianBlur` and the [Median blur](https://docs.opencv.org/2.4/doc/tutorials/imgproc/gausian_median_blur_bilateral_filter/gausian_median_blur_bilateral_filter.html#median-filter) - `cv2.medianBlur`. To apply the blurring, we need to specify the size of the `filter`. Here we use `17 x 17` for a square filter.
 
 ```python
-blurred_image = cv2.blur(image, (3,3))
+blurred_image = cv2.blur(image, (17,17))
 ```
+
+|      Original Image       |           Blurred Image (17x17)           |
+| :-----------------------: | :---------------------------------------: |
+| ![color](codes/messi.jpg) | ![color](codes/messi_blurred_image.png) |
 
 ## Image Thresholding
 
@@ -61,7 +65,12 @@ _,thresh1=cv2.threshold(image,127,255,cv2.THRESH_BINARY)
 
 With this method, we can change the perspective or `view` of a given image for getting better insights about the required information. This method involves taking important points in a source image and then matching or warping those points to known points in the target image. An example is shown below, where we have a sheet of paper that is not aligned and we use perspective transformation to align the sheet of paper so that the information on it can be easily viewed.
 
-![perspective_transform](code/Perspective-&-Affine-Transform-using-OpenCV.png)
+
+<p align="center">
+    <img src="/3_ocr_with_opencv/code/Perspective-&-Affine-Transform-using-OpenCV.png">
+    <!-- <p align="center">insert caption here</p> -->
+</p>
+
 
 ```python
 import cv2
@@ -81,8 +90,9 @@ points_A=np.float32([[320,15],[700,215],[85,610],[530,780]])
 points_B=np.float32([[0,0],[420,0],[0,592],[420,592]])
 
 #use the two sets of two points to compute the prespective transformation matrix,M
-
 M=cv2.getPerspectiveTransform(points_A,points_B)
+
+# now 'warp' the original image with the transformation matrix to get an aligned image
 warped=cv2.warpPerspective(image,M,(420,594))
 cv2.imshow('warpprespective',warped)
 cv2.waitKey(0)
@@ -100,8 +110,3 @@ Another method of transformation is [Affine Transformation](https://docs.opencv.
 4. Computer Vision: Algorithms and Applications, 1st ed. © 2010 Richard Szeliski, Microsoft Research
 5. Image Thresholding - https://en.wikipedia.org/wiki/Thresholding_(image_processing)
 6. Image Manipulations in Python OpenCV - https://circuitdigest.com/tutorial/image-manipulation-in-python-opencv-part2
-
-https://circuitdigest.com/tutorial/image-manipulation-in-python-opencv-part2
-https://www.pyimagesearch.com/2014/01/20/basic-image-manipulations-in-python-and-opencv-resizing-scaling-rotating-and-cropping/
-
-
