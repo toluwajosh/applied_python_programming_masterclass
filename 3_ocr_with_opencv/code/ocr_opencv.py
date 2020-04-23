@@ -77,7 +77,10 @@ for (startX, startY, endX, endY) in boxes:
     # cv2.rectangle(warped_image, (startX, startY), (endX, endY), (0, 255, 0), 2)
 
 # sort the results bounding box coordinates from top to bottom
-results = sorted(results, key=lambda r: r[0][1])
+line_quantize = 40
+results = sorted(
+    results, key=lambda r: r[0][1] * 720 // line_quantize + r[0][0]
+)
 # loop over the results
 all_text = ""
 for ((startX, startY, endX, endY), text) in results:
