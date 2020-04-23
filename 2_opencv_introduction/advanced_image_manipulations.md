@@ -38,8 +38,8 @@ The blur, or smoothing, of an image removes "outlier" pixels that may be noise i
 blurred_image = cv2.blur(image, (17,17))
 ```
 
-|      Original Image       |           Blurred Image (17x17)           |
-| :-----------------------: | :---------------------------------------: |
+|      Original Image       |          Blurred Image (17x17)          |
+| :-----------------------: | :-------------------------------------: |
 | ![color](codes/messi.jpg) | ![color](codes/messi_blurred_image.png) |
 
 ## Image Thresholding
