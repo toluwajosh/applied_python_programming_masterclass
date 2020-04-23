@@ -35,7 +35,7 @@ boxes, confidences = east_detector(warped_image)
 rW = W / float(newW)
 rH = H / float(newH)
 
-# padding ror bouding boxes
+# padding for bouding boxes
 padding = 0.05
 
 results = []

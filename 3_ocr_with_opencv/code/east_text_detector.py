@@ -19,13 +19,13 @@ def east_detector(
 ):
     """Function that uses the east detector model for text detection.
     The code here is taken from the tutorial: https://www.pyimagesearch.com/2018/08/20/opencv-text-detection-east-text-detector/
-    
+
     Arguments:
         image {numpy array} -- input image
         model {model weight} -- frozen east model weights
         width {int} -- resized image width (should ge multiple of 32)
         height {int} -- resized image height (should be multiple of 32)
-    
+
     Returns:
         [numpy array] -- [text bounding boxes]
     """

@@ -3,15 +3,16 @@
 
 import cv2
 
+
 def get_paper_corners(frame):
     """get corner of papers using mouse callback
-    
+
     Arguments:
         frame {numpy array} -- input frame
-    
+
     Raises:
         an: [description]
-    
+
     Returns:
         [type] -- [description]
     """
