@@ -14,7 +14,9 @@ class Animal(object):
 
 class Dog(Animal):
     def __init__(self, name, age, color):
-        self.name = name
+        # self.name = name
+        super().__init__(name)
+        self.age = age
         self.color = color
 
     # a function to introduce the class instance
