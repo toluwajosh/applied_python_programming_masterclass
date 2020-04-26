@@ -3,7 +3,7 @@
 <!-- page break -->
 <!-- <div style="page-break-after: always;"></div> -->
 
-In this section, we will learn about basic elements in python programming, that is the bits and pieces that make up the language and makes it easy for beginners. To do this, we are going to be using [the python interactive environment](https://docs.microsoft.com/en-us/visualstudio/python/python-interactive-repl-in-visual-studio?view=vs-2019), through the command line. The Interactive environment lets you enter arbitrary Python code and see immediate results. This way of coding helps you learn and experiment with [functions](#introduction-to-functions) and libraries, and to interactively develop working code to include in your projects. This is a very great feature of the python programming language. In VScode, we will access this by typing `python` in the terminal at the bottom of the window.
+In this section, we will learn about basic elements in python programming, that is the bits and pieces that make up the language and makes it easy for beginners. To do this, we are going to be using [the python interactive shell](https://docs.microsoft.com/en-us/visualstudio/python/python-interactive-repl-in-visual-studio?view=vs-2019), through the command line. The Interactive shell lets you enter arbitrary Python code and see immediate results. This way of coding helps you learn and experiment with [functions](#introduction-to-functions) and libraries, and to interactively develop working code to include in your projects. This is a very great feature of the python programming language. In VScode, we will access this by typing `python` in the terminal at the bottom of the window. Note that `>>>` signifies that we are running that line of code in an interactive shell.
 
 ### Printing
 
