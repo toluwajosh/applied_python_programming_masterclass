@@ -53,7 +53,7 @@ class Animal(object):
         self.name = name
 ```
 
-`object` is the base class that all other objects `inherit` from. It allows us to use predefined functions or methods for a class, one of which is `__init__`. `__ini__` is used to initialize a class attribute when the instance is created. `self` is used to refer to the current class inside itself. An updated initialization of our `Animals` class will become;
+`object` is the base class that all other objects `inherit` from. It allows us to use predefined functions or methods for a class, one of which is `__init__`. `__init__` is used to initialize a class attribute when the instance is created. `self` is used to refer to the current class inside itself. An updated initialization of our `Animals` class will become;
 
 ```python
 # lets use a name to identify the animal
@@ -92,7 +92,7 @@ True
 
 ## Class Methods
 
-We have already used the class method `__ini__`. There are many of such predefined methods but we won't cover them here. However, we can create our own methods. These are just functions that belong to a class. Remember {List}.pop(). `pop` is a function of the `List` class so we can call `pop` on a class instance.
+We have already used the class method `__init__`. There are many of such predefined methods but we won't cover them here. However, we can create our own methods. These are just functions that belong to a class. Remember {List}.pop(). `pop` is a function of the `List` class so we can call `pop` on a class instance.
 
 ```python
 class Dog(Animal):
@@ -105,10 +105,8 @@ class Dog(Animal):
     def introduce(self): # may or may not take an argument
         print("I am ", self.name, ".Nice to meet you.")
 
-
 >>> a_dog = Dog("bull_dog")
 >>> a_dog.introduce()
-
 'I am bull_dog. Nice to meet you.'
 ```
 
@@ -374,9 +372,7 @@ window.mainloop()
 
 ```
 
-The calculator is not perfect yet. Can you make it better? Let me know what you did to make it better. Cheers
-
-Here is the end of the Python Programming Essentials Series. In the next series, I will do 10 simple Python Projects that can give anyone a good grasp of the Language. See you then.
+The calculator is not perfect yet. Can you make it better? Let me know what you did to make it better. See the next class section for a class assignment on this section.
 
 ## Bibliography
 
