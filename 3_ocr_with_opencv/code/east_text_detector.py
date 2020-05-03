@@ -122,7 +122,6 @@ def east_detector(
 
 
 if __name__ == "__main__":
-    pass
     # construct the argument parser and parse the arguments
     ap = argparse.ArgumentParser()
     ap.add_argument("-i", "--image", type=str, help="path to input image")

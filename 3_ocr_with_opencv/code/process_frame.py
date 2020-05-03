@@ -1,6 +1,5 @@
 """Script to process frame
 """
-
 import cv2
 
 
@@ -8,17 +7,26 @@ def get_paper_corners(frame):
     """get corner of papers using mouse callback
 
     Arguments:
-        frame {numpy array} -- input frame
+        frame {numpy array} -- input frame or image
 
     Raises:
-        an: [description]
+        an AssertionError: Selected corner points must be equal to 4.
 
     Returns:
-        [type] -- [description]
+        [list] -- a list of corner points
     """
     corners = []
 
     def get_click_coord(event, x, y, flags, param):
+        """Callback function to get coordinate of clicked points
+
+        Arguments:
+            event {cv2.EVENT} -- OpenCV Event
+            x {int} -- x coordinate
+            y {int} -- y coordinate
+            flags {[type]} -- event flag. Not used
+            param {[type]} -- event parameter. Not used
+        """
         if event == cv2.EVENT_LBUTTONDOWN:
             if len(corners) > 4:
                 corners.pop()
@@ -30,12 +38,17 @@ def get_paper_corners(frame):
                 print(corners)
 
     # give our window a name
-    cv2.namedWindow("display")
-    cv2.setMouseCallback("display", get_click_coord)
+    window_name = "display"
+    cv2.namedWindow(window_name)
+    cv2.setMouseCallback(window_name, get_click_coord)
 
-    cv2.imshow("display", frame)
+    cv2.imshow(window_name, frame)
     cv2.waitKey(0)
 
     # raise an error if the number of corners supplied is no up to 4
     assert len(corners) > 3, "Corner points are not complete. Must be 4!"
     return corners
+
+
+if __name__ == "__main__":
+    pass

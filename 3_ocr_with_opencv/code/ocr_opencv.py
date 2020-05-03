@@ -2,11 +2,20 @@
 ocr script
 """
 
+import os
+
 import cv2
 import numpy as np
+import pytesseract
+
+# user packages
 from east_text_detector import east_detector
 from process_frame import get_paper_corners
-import pytesseract
+
+# The next line is needed in windows only, so we check
+if os.name == 'nt':
+    pytesseract.pytesseract.tesseract_cmd = r'C:\Users\joshu\AppData\Local\Tesseract-OCR\tesseract.exe'
+
 
 input_image = cv2.imread("lazy_sheet.jpg")
 gray_image = cv2.cvtColor(input_image, cv2.COLOR_RGB2GRAY)

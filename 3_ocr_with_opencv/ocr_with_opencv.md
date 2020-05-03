@@ -18,7 +18,26 @@ Due to the length of the code used for this purpose. The code will be supplied i
 1. **[The EAST text detector](https://arxiv.org/abs/1704.03155):** This function detects regions in the image where there are texts and it outputs bounding boxes of those text regions.
 
 ## Install Tesseract
+
 Tesseract, a highly popular OCR engine, was originally developed by Hewlett Packard in the 1980s and was then open-sourced in 2005. Think of it as a special function that allows us to do OCR, however, to use it we need to install it in a special way.
+
+### Windows Installation
+
+The Windows installation follows the steps on [this page](https://github.com/tesseract-ocr/tesseract/wiki#windows).
+Install `pytessaract` using `pip install pytessearact`. This is the interface between python and the tesseract engine.
+
+### Linux Installation
+
+The Linux installation follows the steps on [this page](https://github.com/tesseract-ocr/tesseract/wiki#linux). It should be pretty straight forward.
+
+## Other Python packages
+
+- Install `imutils` package to enable us use a `non_max_suppression` function.
+
+## Download trained models
+
+- EAST text detector model
+- Tesseract model
 
 
 ## Bibliography
