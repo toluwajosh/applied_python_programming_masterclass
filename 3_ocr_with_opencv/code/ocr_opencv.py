@@ -12,10 +12,12 @@ import pytesseract
 from east_text_detector import east_detector
 from process_frame import get_paper_corners
 
-# The next line is needed in windows only, so we check
-if os.name == 'nt':
-    pytesseract.pytesseract.tesseract_cmd = r'C:\Users\joshu\AppData\Local\Tesseract-OCR\tesseract.exe'
-
+# The next line is needed in windows only,
+# so it only runs if the system is windows
+if os.name == "nt":
+    pytesseract.pytesseract.tesseract_cmd = (
+        r"C:\Users\joshu\AppData\Local\Tesseract-OCR\tesseract.exe"
+    )
 
 input_image = cv2.imread("lazy_sheet.jpg")
 gray_image = cv2.cvtColor(input_image, cv2.COLOR_RGB2GRAY)
@@ -68,6 +70,7 @@ for (startX, startY, endX, endY) in boxes:
     startY = max(0, startY - dY)
     endX = min(540, endX + (dX * 2))
     endY = min(720, endY + (dY * 2))
+
     # extract the actual padded ROI
     roi = warped_image[startY:endY, startX:endX]
 
@@ -87,9 +90,7 @@ for (startX, startY, endX, endY) in boxes:
 
 # sort the results bounding box coordinates from top to bottom
 line_quantize = 40
-results = sorted(
-    results, key=lambda r: r[0][1] * 720 // line_quantize + r[0][0]
-)
+results = sorted(results, key=lambda r: r[0][1] * 720 // line_quantize + r[0][0])
 # loop over the results
 all_text = ""
 for ((startX, startY, endX, endY), text) in results:
@@ -123,12 +124,9 @@ output_file = open("scan_text.txt", "a")
 output_file.write(all_text)
 output_file.close()
 
-
 # show the output image
 cv2.imshow("Text Detection", warped_image)
 cv2.waitKey(0)
 
-# cv2.imshow("display", input_image)
-# cv2.imshow("transformed", warped_image)
-# cv2.waitKey(0)
+# close all windows
 cv2.destroyAllWindows()

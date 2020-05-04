@@ -124,10 +124,10 @@ image = cv2.imread("starry_night.jpg")
 
 # to crop we specify the start and the end of the index
 # in the ros and column
-cropped = img[100:600, 100:600]
+cropped = image[100:600, 100:600]
 
 # Save the image. Follow this style for other code snippets in this section
-cv2.imsave("starry_night_cropped.jpg", cropped)
+cv2.imwrite("starry_night_cropped.jpg", cropped)
 ```
 
 |          Original Image          |              Cropped Image               |

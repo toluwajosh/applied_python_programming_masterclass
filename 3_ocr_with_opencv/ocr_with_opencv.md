@@ -1,19 +1,19 @@
 # OCR with OpenCV
 
-Optical Character Recognition (OCR) is th electronic or mechanical conversion of images of typed, handwritten or printed text into machine-encoded text, whether from a scanned document, a photo of a document, a scene-photo or from subtitle text superimposed on an image.
+Optical Character Recognition (OCR) is the electronic or mechanical conversion of images of typed, handwritten or printed text into machine-encoded text, whether from a scanned document, a photo of a document, a scene-photo or from subtitle text superimposed on an image.
 
-In this section, we will try to understand the problem and learn the process of solving the problem using the tools we have learnt so far. Our object is to recognize characters in a  printed document using a webcam.
+In this section, we will try to understand the problem and learn the process of solving the problem using the tools we have learnt so far. Our object is to recognize characters in a printed document using a webcam.
 
 To solve the OCR problem, we have to do the following
 
-1. Capture Image, from file or camera.
-2. Recognize paper corners, edge detection
+1. Capture Image, from file.
+2. Recognize/Selecting paper corners
 3. Preprocess Image; Smoothing, Cropping, Perspective Transform.
 4. Recognize Text Regions: Thresholding and Contour extraction
 5. Recognize individual characters in the text regions
 6. Output the recognized text in a readable order.
 
-Due to the length of the code used for this purpose. The code will be supplied in a different file. In order to finish the OCR task, we need two special functions. These functions were developed through a method called [Deep Learning](https://en.wikipedia.org/wiki/Deep_learning), which has become very popular recently for computer vision tasks. Because of its complexity will not learn about deep learning in this class. However, it is sufficient to know how to use this class of functions in OpenCV. The two function are;
+Due to the length of the code used for this purpose. The code will be supplied in a different file. In order to finish the OCR task, we need two special functions. These functions were developed through a method called [Deep Learning](https://en.wikipedia.org/wiki/Deep_learning), which has become very popular recently for computer vision tasks. Because of its complexity, we will not learn about deep learning in this class. However, it is sufficient to know how to use this class of functions in OpenCV. The two function are;
 
 1. **[The EAST text detector](https://arxiv.org/abs/1704.03155):** This function detects regions in the image where there are texts and it outputs bounding boxes of those text regions.
 
@@ -23,8 +23,13 @@ Tesseract, a highly popular OCR engine, was originally developed by Hewlett Pack
 
 ### Windows Installation
 
-The Windows installation follows the steps on [this page](https://github.com/tesseract-ocr/tesseract/wiki#windows).
-Install `pytessaract` using `pip install pytessearact`. This is the interface between python and the tesseract engine.
+- The Windows installation follows the steps on [this page](https://github.com/tesseract-ocr/tesseract/wiki#windows).
+
+- Install `pytessaract` pip package. This is the interface between python and the tesseract engine.
+
+```bash
+pip install pytessearact
+```
 
 ### Linux Installation
 
@@ -32,13 +37,32 @@ The Linux installation follows the steps on [this page](https://github.com/tesse
 
 ## Other Python packages
 
-- Install `imutils` package to enable us use a `non_max_suppression` function.
+Install `imutils` package to enable us use a `non_max_suppression` function.
+
+```bash
+pip install imutils
+```
 
 ## Download trained models
 
 - EAST text detector model
 - Tesseract model
 
+## Using Deep Learning Functions in OpenCV
+
+Using deep learning functions in OpenCV is pretty easy. There are a few things you need to know.
+
+- The input to the function or model
+- The output of the model
+
+An illustration is given below. We will treat this function as a black box which we do not know what is inside. However, we need to know how to feed in an input and use the output.
+
+![color](codes/starry_night.jpg)
+
+## Assignment
+
+- Edit the code so that you can capture image from your webcam in real time.
+- Currently the paper size is hard-coded into the program so we have to choose a full paper area for the code to work effectively. Add the feature to be able to select an arbitrary rectangle on the source image and recognize the text in the selected rectangle. **This is not a trivial task**, but if you can do this, then you have understood the OCR problem well enough.
 
 ## Bibliography
 
