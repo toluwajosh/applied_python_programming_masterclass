@@ -57,7 +57,32 @@ Using deep learning functions in OpenCV is pretty easy. There are a few things y
 
 An illustration is given below. We will treat this function as a black box which we do not know what is inside. However, we need to know how to feed in an input and use the output.
 
-![color](codes/starry_night.jpg)
+![color](code/dl_function.png)
+
+## Text Detection with EAST detector
+
+The first stage of OCR is text detection. As mentioned in the previous section, we are going to use a `pretrained` deep learning model called EAST (An Efficient and Accurate Scene Text Detector) Detector. All we have to do at the stage is to [download the pretrained model](https://drive.google.com/open?id=1yHEuc6AK0JI0yzR4Qcru0Z_6GVGHkwHV) that will be loaded by OpenCV to perform text region detection.
+We then used the `dnn` module in OpenCV to load and use the model like so;
+
+```python
+# specify the path to the model
+model_path = "frozen_east_text_detection.pb"
+
+#load the model
+net = cv2.dnn.readNet(model)
+
+# construct a blob from the image and then perform a forward pass of
+# the model to obtain the two output layer sets
+blob = cv2.dnn.blobFromImage(
+    image, 1.0, (W, H), (123.68, 116.78, 103.94), swapRB=True, crop=False
+)
+net.setInput(blob)
+# we now get output from the model.
+# In this case, the output is a tuple of scores and geometry
+# This will be different for another model
+scores, geometry = net.forward(layerNames)
+```
+
 
 ## Assignment
 
