@@ -1,5 +1,5 @@
 # USAGE
-# python opencv_text_detection_image.py --image images/lebron_james.jpg
+# python opencv_text_detection_image.py --image images/lazy_sheet.jpg
 # --east frozen_east_text_detection.pb
 
 # import the necessary packages
@@ -41,6 +41,9 @@ def east_detector(
     image = cv2.resize(image, (newW, newH))
     (H, W) = image.shape[:2]
 
+    # this part is model specific. Don't worry about the detail
+    # Understand that this is how the model is applied.
+    # will be different for another model type.
     # define the two output layer names for the EAST detector model that
     # we are interested -- the first is the output probabilities and the
     # second can be used to derive the bounding box coordinates of text
@@ -155,7 +158,7 @@ if __name__ == "__main__":
     image = cv2.imread(args["image"])
     orig = image.copy()
 
-    boxes = east_detector(
+    boxes, confidences = east_detector(
         image,
         args["east"],
         args["width"],
@@ -169,6 +172,8 @@ if __name__ == "__main__":
     (newW, newH) = (args["width"], args["height"])
     rW = W / float(newW)
     rH = H / float(newH)
+
+    print(len(boxes))
 
     # loop over the bounding boxes
     for (startX, startY, endX, endY) in boxes:
