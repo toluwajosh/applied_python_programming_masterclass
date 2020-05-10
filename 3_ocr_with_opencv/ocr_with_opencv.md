@@ -45,17 +45,17 @@ pip install imutils
 
 ## Download trained models
 
-- EAST text detector model
-- Tesseract model
+- EAST text detector model. See the Text [Detection with EAST detector](#text-detection-with-east-detector) section below.
+- Tesseract model. *Automatically downloaded with the installation.*
 
 ## Using Deep Learning Functions in OpenCV
 
-Using deep learning functions in OpenCV is pretty easy. There are a few things you need to know.
+Using deep learning functions in OpenCV is pretty easy. There are a few things we need to know.
 
-- The input to the function or model
-- The output of the model
+- The input to the function or model. We need to know the size and shape of the input that is expected by the model. Most models expect an image with a specific size and number of channels.
+- The output of the model. Depending on the application of the model, the output type or shape is different. It is necessary to know this so we can know how to use the model output.
 
-An illustration is given below. We will treat this function as a black box which we do not know what is inside. However, we need to know how to feed in an input and use the output.
+An illustration is given below. We will treat this function as a black box which we do not know what is inside. However, the input and output.
 
 ![color](code/dl_function.png)
 
