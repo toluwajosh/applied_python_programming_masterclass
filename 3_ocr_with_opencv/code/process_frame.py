@@ -5,13 +5,10 @@ import cv2
 
 def get_paper_corners(frame):
     """get corner of papers using mouse callback
-
     Arguments:
         frame {numpy array} -- input frame or image
-
     Raises:
         an AssertionError: Selected corner points must be equal to 4.
-
     Returns:
         [list] -- a list of corner points
     """
@@ -19,7 +16,6 @@ def get_paper_corners(frame):
 
     def get_click_coord(event, x, y, flags, param):
         """Callback function to get coordinate of clicked points
-
         Arguments:
             event {cv2.EVENT} -- OpenCV Event
             x {int} -- x coordinate

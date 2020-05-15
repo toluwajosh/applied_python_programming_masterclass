@@ -9,8 +9,8 @@ import numpy as np
 import pytesseract
 
 # user packages
-from east_text_detector import east_detector
 from process_frame import get_paper_corners
+from east_text_detector import east_detector
 
 # The next line is needed in windows only,
 # so it only runs if the system is windows
@@ -19,7 +19,7 @@ if os.name == "nt":
         r"C:\Users\joshu\AppData\Local\Tesseract-OCR\tesseract.exe"
     )
 
-input_image = cv2.imread("lazy_sheet.jpg")
+input_image = cv2.imread("lazy_sheet.jpg")  # hard-coded image path
 gray_image = cv2.cvtColor(input_image, cv2.COLOR_RGB2GRAY)
 
 # detect paper edges
@@ -90,7 +90,11 @@ for (startX, startY, endX, endY) in boxes:
 
 # sort the results bounding box coordinates from top to bottom
 line_quantize = 40
-results = sorted(results, key=lambda r: r[0][1] * 720 // line_quantize + r[0][0])
+image_height = 720
+results = sorted(
+    results, key=lambda r: r[0][1] * image_height // line_quantize + r[0][0]
+)
+
 # loop over the results
 all_text = ""
 for ((startX, startY, endX, endY), text) in results:

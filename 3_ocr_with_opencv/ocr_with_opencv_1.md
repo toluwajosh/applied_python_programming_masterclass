@@ -15,11 +15,17 @@ To solve the OCR problem, we have to do the following
 
 Due to the length of the code used for this purpose. The code will be supplied in a different file. In order to finish the OCR task, we need two special functions. These functions were developed through a method called [Deep Learning](https://en.wikipedia.org/wiki/Deep_learning), which has become very popular recently for computer vision tasks. Because of its complexity, we will not learn about deep learning in this class. However, it is sufficient to know how to use this class of functions in OpenCV. The two function are;
 
-1. **[The EAST text detector](https://arxiv.org/abs/1704.03155):** This function detects regions in the image where there are texts and it outputs bounding boxes of those text regions.
+## [The EAST detector](https://arxiv.org/abs/1704.03155)
 
-## Install Tesseract
+The Efficient and Accurate Scene Text Detector (EAST Detector), detects regions in the image where there are texts and outputs bounding boxes (coordinates of the corners of the rectangle surrounding the text) of those text regions.
 
-Tesseract, a highly popular OCR engine, was originally developed by Hewlett Packard in the 1980s and was then open-sourced in 2005. Think of it as a special function that allows us to do OCR, however, to use it we need to install it in a special way.
+No need to install EAST separately as it can be accessed through the OpenCV function already installed, we just need to download the [pretrained model](https://drive.google.com/open?id=1yHEuc6AK0JI0yzR4Qcru0Z_6GVGHkwHV) that will be used by OpenCV.
+
+
+## [Tesseract](https://github.com/tesseract-ocr/tesseract)
+
+a highly popular OCR engine, was originally developed by Hewlett Packard in the 1980s and was then open-sourced in 2005. This function transforms image regions with text into string. That is, it recognizes the string in the image and outputs an editable string literal.
+Think of it as a special function that allows us to do OCR, however, to use it we need to install it in a special way.
 
 ### Windows Installation
 
@@ -28,7 +34,7 @@ Tesseract, a highly popular OCR engine, was originally developed by Hewlett Pack
 - Install `pytessaract` pip package. This is the interface between python and the tesseract engine.
 
 ```bash
-pip install pytessearact
+pip install pytesseract
 ```
 
 ### Linux Installation
@@ -37,16 +43,15 @@ The Linux installation follows the steps on [this page](https://github.com/tesse
 
 ## Other Python packages
 
-Install `imutils` package to enable us use a `non_max_suppression` function.
+Install `imutils` package to enable us use a [`non_max_suppression`](https://www.pyimagesearch.com/2014/11/17/non-maximum-suppression-object-detection-python/) function.
+
+> Non-maximum-suppression is a way of combining multiple outputs of the same input into one output. So if we have multiple bounding boxes for the same text, we would like to combine these outputs to a single one.
+
+Install as follows;
 
 ```bash
 pip install imutils
 ```
-
-## Download trained models
-
-- EAST text detector model. See the Text [Detection with EAST detector](#text-detection-with-east-detector) section below.
-- Tesseract model. *Automatically downloaded with the installation.*
 
 ## Using Deep Learning Functions in OpenCV
 
@@ -289,11 +294,9 @@ if __name__ == "__main__":
     cv2.waitKey(0)
 ```
 
+After running the detector, you should have this output;
 
-## Assignment
-
-- Edit the code so that you can capture image from your webcam in real time.
-- Currently the paper size is hard-coded into the program so we have to choose a full paper area for the code to work effectively. Add the feature to be able to select an arbitrary rectangle on the source image and recognize the text in the selected rectangle. **This is not a trivial task**, but if you can do this, then you have understood the OCR problem well enough.
+![east_output](code/east_output.png)
 
 ## Bibliography
 
