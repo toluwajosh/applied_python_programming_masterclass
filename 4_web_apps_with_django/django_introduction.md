@@ -55,6 +55,9 @@ Quit the server with CONTROL-C.
 
 Once the server is running you can view the site by navigating to the following URL on your local web browser: http://127.0.0.1:8000/. You should see a site that looks like this:
 
+![django_site](images/default_django_site.png)
+
+Congratulations! You have run your first and simplest django web application. In the next section, we will follow the same process but with more involved steps to create a mini blog.
 
 # Bibliography
 
