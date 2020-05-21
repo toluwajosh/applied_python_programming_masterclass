@@ -87,7 +87,7 @@ Now if you open the saved image in your directory, it should be a grayscale imag
 
 |           Color Image            |            Grayscale Image             |
 | :------------------------------: | :------------------------------------: |
-| ![color](codes/starry_night.jpg) | ![color](codes/starry_night_saved.png) |
+| ![color](images/starry_night.jpg) | ![color](images/starry_night_saved.png) |
 
 <!-- page break -->
 <!-- <div style="page-break-after: always;"></div> -->

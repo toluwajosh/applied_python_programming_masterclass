@@ -132,7 +132,7 @@ cv2.imwrite("starry_night_cropped.jpg", cropped)
 
 |          Original Image          |              Cropped Image               |
 | :------------------------------: | :--------------------------------------: |
-| ![color](codes/starry_night.jpg) | ![color](codes/starry_night_cropped.png) |
+| ![color](images/starry_night.jpg) | ![color](images/starry_night_cropped.png) |
 
 
 ### Image flipping
@@ -156,7 +156,7 @@ image_flipped_ud = np.flipud(image)
 
 |          Image flipped left/right           |            Image flipped up/down            |
 | :-----------------------------------------: | :-----------------------------------------: |
-| ![color](codes/starry_night_flipped_lr.png) | ![color](codes/starry_night_flipped_ud.png) |
+| ![color](images/starry_night_flipped_lr.png) | ![color](images/starry_night_flipped_ud.png) |
 
 ## Image brightening and darkening
 
@@ -182,7 +182,7 @@ dark_image = cv2.subtract(image, M)
 
 |              Bright Image               |              Dark Image               |
 | :-------------------------------------: | :-----------------------------------: |
-| ![color](codes/starry_night_bright.png) | ![color](codes/starry_night_dark.png) |
+| ![color](images/starry_night_bright.png) | ![color](images/starry_night_dark.png) |
 
 ### Image masking
 
@@ -211,7 +211,7 @@ masked_image = image * zeros_image
 
 |              Original Image               |              Masked Image               |
 | :-------------------------------------: | :-----------------------------------: |
-| ![color](codes/starry_night.jpg) | ![color](codes/starry_night_masked.png) |
+| ![color](images/starry_night.jpg) | ![color](images/starry_night_masked.png) |
 
 ## Bibliography
 

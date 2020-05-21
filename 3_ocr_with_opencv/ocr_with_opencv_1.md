@@ -62,7 +62,7 @@ Using deep learning functions in OpenCV is pretty easy. There are a few things w
 
 An illustration is given below. We will treat this function as a black box which we do not know what is inside. However, the input and output.
 
-![color](code/dl_function.png)
+![color](images/dl_function.png)
 
 ## Text Detection with EAST detector
 
@@ -296,7 +296,7 @@ if __name__ == "__main__":
 
 After running the detector, you should have this output;
 
-![east_output](code/east_output.png)
+![east_output](images/east_output.png)
 
 ## Bibliography
 

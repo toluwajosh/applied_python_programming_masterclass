@@ -6,10 +6,8 @@ In this section we will learn various image manipulation and processing techniqu
 
 This is an image processing technique for finding object boundaries in images. It words by detecting discontinuities in brightness. The common edge detection algorithms include Sobel and Canny. OpenCV provides `cv2.Canny()` function for edge detection. To apply this function, we need two parameters - threshold1 and threshold2, or minVal and maxVal respectively. Any edges with intensity gradient more than maxVal are sure to be edges and those below minVal are sure to be non-edges, so discarded. Those who lie between these two thresholds are classified edges or non-edges based on their connectivity. If they are connected to "sure-edge" pixels, they are considered to be part of edges. Otherwise, they are also discarded. See the image below:
 
-<!-- ![banner](/2_opencv_introduction/codes/hysteresis.jpg) -->
-
 <p align="center">
-    <img src="/2_opencv_introduction/codes/hysteresis.jpg">
+    <img src="images/hysteresis.jpg">
     <!-- <p align="center">insert caption here</p> -->
 </p>
 
@@ -25,9 +23,9 @@ edges = cv2.Canny(gray_image, threshold1=100, threshold2=200)
 
 ```
 
-|      Original Image       |              Canny Edges              |
-| :-----------------------: | :-----------------------------------: |
-| ![color](codes/messi.jpg) | ![color](codes/messi_canny_edges.png) |
+|       Original Image       |              Canny Edges               |
+| :------------------------: | :------------------------------------: |
+| ![color](images/messi.jpg) | ![color](images/messi_canny_edges.png) |
 
 
 ## Image blurring
@@ -38,17 +36,17 @@ The blur, or smoothing, of an image removes "outlier" pixels that may be noise i
 blurred_image = cv2.blur(image, (17,17))
 ```
 
-|      Original Image       |          Blurred Image (17x17)          |
-| :-----------------------: | :-------------------------------------: |
-| ![color](codes/messi.jpg) | ![color](codes/messi_blurred_image.png) |
+|       Original Image       |          Blurred Image (17x17)           |
+| :------------------------: | :--------------------------------------: |
+| ![color](images/messi.jpg) | ![color](images/messi_blurred_image.png) |
 
 ## Image Thresholding
 
 This is the simplest method of segmenting images. This method can be used to create binary images such the one shown below. The simplest thresholding methods replace each pixel in an image with a black pixel if the image intensity I is less than some fixed constant, or a white pixel if the image intensity is greater than that constant. In the example image on the below, this results in the dark tree becoming completely black, and the white snow becoming completely white.
 
-|                                            Original Image                                            |                                                  thresholded image                                                   |
-| :--------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------: |
-| ![original](/2_opencv_introduction/codes/1024px-Pavlovsk_Railing_of_bridge_Yellow_palace_Winter.jpg) | ![thresholded](/2_opencv_introduction/codes/1024px-Pavlovsk_Railing_of_bridge_Yellow_palace_Winter_bw_threshold.jpg) |
+|                                 Original Image                                 |                                       thresholded image                                        |
+| :----------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
+| ![original](images/1024px-Pavlovsk_Railing_of_bridge_Yellow_palace_Winter.jpg) | ![thresholded](images/1024px-Pavlovsk_Railing_of_bridge_Yellow_palace_Winter_bw_threshold.jpg) |
 
 We will demonstrate thresholding be applying it to a gradient image. OpenCV has various thresholding types such as `cv2.THRESH_BINARY` – most common, `cv2.THRESH_BINARY_INV`, `cv2.THRESH_TRUNC`, `cv2.THRESH_TOZERO`, `cv2.THRESH_TOZERO_INV`. Here we will use `cv2.THRESH_BINARY` to create a binary image.
 
@@ -67,7 +65,7 @@ With this method, we can change the perspective or `view` of a given image for g
 
 
 <p align="center">
-    <img src="/3_ocr_with_opencv/code/Perspective-&-Affine-Transform-using-OpenCV.png">
+    <img src="images/Perspective-&-Affine-Transform-using-OpenCV.png">
     <!-- <p align="center">insert caption here</p> -->
 </p>
 

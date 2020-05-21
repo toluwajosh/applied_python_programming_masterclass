@@ -35,7 +35,7 @@ django-admin startproject testsite
 cd testsite
 ```
 
-You can now run the development we server from within the folder using **`manage.py`** and the `runserver` command as shown.
+You can now run the development server from within the folder using **`manage.py`** and the `runserver` command as shown.
 
 ```bash
 python manage.py runserver 
@@ -59,4 +59,3 @@ Once the server is running you can view the site by navigating to the following 
 # Bibliography
 
 1. MDN Web Docs, Django Web Framework - https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django
-2. 
