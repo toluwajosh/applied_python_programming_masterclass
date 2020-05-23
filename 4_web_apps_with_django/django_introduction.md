@@ -38,7 +38,7 @@ cd testsite
 You can now run the development server from within the folder using **`manage.py`** and the `runserver` command as shown.
 
 ```bash
-python manage.py runserver 
+python manage.py runserver
 Performing system checks...
 
 System check identified no issues (0 silenced).
