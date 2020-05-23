@@ -32,3 +32,27 @@ INSTALLED_APPS = [
 ]
 ```
 
+## Specify the database
+
+At this stage, don't worry much about databases. This is typically where the information about our site is stored. So any time we make a request through our site, the information is retrieved from the database.
+
+> A [database](https://www.oracle.com/database/what-is-database.html) is an organized collection of structured information, or data, typically stored electronically in a computer system. A database is usually controlled by a database management system (DBMS). Together, the data and the DBMS, along with the applications that are associated with them, are referred to as a database system, often shortened to just database.
+> Data within the most common types of databases in operation today is typically modeled in rows and columns in a series of tables to make processing and data querying efficient. The data can then be easily accessed, managed, modified, updated, controlled, and organized. Most databases use structured query language (SQL) for writing and querying data.
+
+We'll use the SQLite database for this example, because we don't expect to require a lot of concurrent access on a demonstration database, and also because it requires no additional work to set up! You can see how this database is configured in settings.py (more information is also included below):
+
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+```
+Because we are using SQLite, we don't need to do any further setup here. Let's move on!
+
+## Set the url mapper
+
+Hook up the URL mapper, inside the project `url.py` and app `url.py`.
+To do this, create `url.py` file in the `blog` directory
+
