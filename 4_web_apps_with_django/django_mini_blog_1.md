@@ -1,8 +1,9 @@
-# Django Mini Blog
+# Django Mini Blog, Part 1
 
 In this section, we are going to create a Mini Blog using the Djanog framework.
-Our blog will have 3 main pages namely, 
-- the Home page, 
+Our blog will have 3 main pages namely,
+
+- the Home page,
 - All Blogs page,
 - All Bloggers page.
 
@@ -34,7 +35,7 @@ INSTALLED_APPS = [
 
 ## Specify the database
 
-At this stage, don't worry much about databases. This is typically where the information about our site is stored. So any time we make a request through our site, the information is retrieved from the database.
+At this stage, don't worry much about databases. This is typically where the information about our site is stored. So any time a user makes a request, the information is retrieved from the database.
 
 > A [database](https://www.oracle.com/database/what-is-database.html) is an organized collection of structured information, or data, typically stored electronically in a computer system. A database is usually controlled by a database management system (DBMS). Together, the data and the DBMS, along with the applications that are associated with them, are referred to as a database system, often shortened to just database.
 > Data within the most common types of databases in operation today is typically modeled in rows and columns in a series of tables to make processing and data querying efficient. The data can then be easily accessed, managed, modified, updated, controlled, and organized. Most databases use structured query language (SQL) for writing and querying data.
@@ -55,7 +56,7 @@ Because we are using SQLite, we don't need to do any further setup here. Let's m
 ## Set the url mapper
 
 Hook up the URL mapper, inside the project `url.py` and app `url.py`.
-To do this, create `url.py` file in the `blog` directory, then add the following lines in the project `url.py`.;
+To do this, create `url.py` file in the `blog` directory, then add the following lines in the project `url.py`. Since our website only has the blog app for now, we will make our blog the home page of the website.;
 
 ```python
 from django.urls import path, include
@@ -66,7 +67,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("blog/", include("blog.urls")), # add this line
+    path("blog/", include("blog.urls")), # add blog app's urls
 
     # plus we want the home path to be redirected to the blog home
     path("", RedirectView.as_view(url="blog/", permanent=True)),
@@ -79,7 +80,7 @@ This ensures that the URLs in the app are accessible and included into the main 
 
 ## Create a home page
 
-Since it is our website only has the blog app for now, we will make our blog the home page of the website. Now let us finish setting up the URLs in the app. Add the following;
+Now let us finish setting up the URLs in the app. Add the following;
 
 ```python
 from django.urls import path
@@ -96,8 +97,8 @@ Before, we go ahead let us talk about the structure that we want for our website
 
 ![models](images/blog_models.png)
 
-The image above shows the basic elements or `models` in our website. That is the pages on our website will show information about these elements in various ways. This is what is known as `views`. Note the relationship between one model to another. For example, the relationship between `Blog` and `Author` is `Many-to-One` meaning that an author can write multiple blogs or, technically in our case, a blog post can only have one author. Same goes for other models.
-So in order to create a page, we need to create a `model` a, corresponding view that gets the requested data from the models, create `HTML` pages that display the data, and return the pages to the user to view in the browser. We also need `templates` - HTML files that are used when rendering data in the `views`. Remember this image from the previous section, describing Django codes;
+The image above shows the basic elements or `models` in our website. That is the pages on our website will show information about these elements in various ways. This is what is known as `views`. Note the relationship between one model and another. For example, the relationship between `Blog` and `Author` is `Many-to-One` meaning that an author can write multiple blogs or, technically in our case, a blog post can only have one author. Other models have respective relationships.
+So in order to create a page, we need to create a `model` a, corresponding `view` that gets the requested data from the models, and `HTML` pages that display the data, and return the pages to the user to view in the browser. The html files are also called `templates`. That is files that are used when rendering data in the `views`. Remember this image from the previous section, describing Django codes;
 
 ![django_files](images/basic-django.png)
 
@@ -116,8 +117,9 @@ So in order to create a page, we need to create a `model` a, corresponding view 
 > <p>My first paragraph.</p>
 >
 > </body>
-> </html> 
->``` 
+> </html>
+>```
+>
 > The `<!DOCTYPE html>` declaration defines this document to be HTML5. 
 > The `<html>` element is the root element of an HTML page
 > The `<head>` element contains meta information about the document
@@ -126,9 +128,9 @@ So in order to create a page, we need to create a `model` a, corresponding view 
 > The `<h1>` element defines a large heading
 > The `<p>` element defines a paragraph
 
-Since this course is focused on Python Programming, we will not go in detail into writing HTML. We will treat them as placeholders and give the explanations as necessary.
+***Since this course is focused on Python Programming, we will not go in detail into writing HTMLs. We will treat them as placeholders and give the explanations as necessary.***
 
-Now let's create the `models`, basically in form of python class objects.
+Now let's create the `models`, represented as python `classes`.
 
 > Models are Python objects that define the structure of an application's data, and provide mechanisms to manage (add, modify, delete) and query records in the database.
 
@@ -242,18 +244,19 @@ Right now, we have done half of the job, but we need to create some data for the
 python manage.py makemigrations
 python manage.py migrate
 ```
+
 The `makemigrations` command creates (but does not apply) the migrations for all applications installed in your project (you can specify the application name as well to just run a migration for a single project). This gives you a chance to checkout the code for these migrations before they are applied — when you're a Django expert you may choose to tweak them slightly!
 
 The `migrate` command actually applies the migrations to your database (Django tracks which ones have been added to the current database).
 
 ## Running the website
 
-During development you can test the website by first serving it using the development web server, and then viewing it on your local web browser. Run the development web server by calling the runserver command (in the same directory as manage.py):
+During development you can test the website by first serving it using the development web server, and then viewing it on your local web browser. Run the development web server by calling the `runserver` command (in the same directory as manage.py):
 
 ```bash
 python3 manage.py runserver
 
- Performing system checks...
+Performing system checks...
 
 System check identified no issues (0 silenced).
 May 23, 2020 - 17:44:57
@@ -286,11 +289,11 @@ You should see something like this after signing in;
 
 ![django_admin_home](django_admin_home.png)
 
-Here, you can see the models that we have created. You can go ahead and check around in each models. Also fill in some dummy data that we can use to verify our website. We already have one `User` which is you, so create and extra one that you can assign a blog.Make sure to have about two blogs and at least on comment for each blog.
+Here, you can see the models that we have created. You can go ahead and check around in each models. Also fill in some dummy data that we can use to verify our website. We already have one `User` which is you, so create and extra one that you can assign a blog. Make sure to have about two blogs and at least on comment for each blog.
 
 ## Create the homepage template
 
-Now that we have some data, let us create a template for our home page. Nothing fancy here though. It is good practice to keep things organized in directories so we are going to create a `template` directory where we will store all our `html` files for the app. Create an `index.html` in `testsite/blog/templates/` and fill in the following.
+Now that we have some data, let us create a template for our home page. Nothing fancy here though. It is good practice to keep things organized in directories so we are going to create a `template` directory where we will store all our `html` files for the app. Now, create an `index.html` in `testsite/blog/templates/` and fill in the following.
 
 ```html
 <!DOCTYPE html>
@@ -317,7 +320,7 @@ Now that we have some data, let us create a template for our home page. Nothing 
 </body>
 ```
 
-What we have done here is create how we want the data that we have defined in the `index` view to be shown on the home page. 
+What we have done here is create how we want the data that we have defined in the `index` view to be shown on the home page.
 
 We need one more thing in the project `settings.py`, add the following to the templates list.
 
