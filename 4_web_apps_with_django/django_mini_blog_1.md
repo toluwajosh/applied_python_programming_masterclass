@@ -334,7 +334,7 @@ TEMPLATES = [
 ]
 ```
 
-Now if you navigate to http://127.0.0.1:8000/blog, you should see something like this.
+Save all files, and navigate to http://127.0.0.1:8000/blog, then you should see something like this.
 
 ![home_page_1](images/home_page_1.png)
 
