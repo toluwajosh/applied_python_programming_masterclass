@@ -21,7 +21,6 @@ The Efficient and Accurate Scene Text Detector (EAST Detector), detects regions 
 
 No need to install EAST separately as it can be accessed through the OpenCV function already installed, we just need to download the [pretrained model](https://drive.google.com/open?id=1yHEuc6AK0JI0yzR4Qcru0Z_6GVGHkwHV) that will be used by OpenCV.
 
-
 ## [Tesseract](https://github.com/tesseract-ocr/tesseract)
 
 a highly popular OCR engine, was originally developed by Hewlett Packard in the 1980s and was then open-sourced in 2005. This function transforms image regions with text into string. That is, it recognizes the string in the image and outputs an editable string literal.

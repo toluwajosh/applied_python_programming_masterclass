@@ -24,22 +24,10 @@ from django.views import generic
 # /testsite/blog/templates/blog/blog_list.html
 class BlogListView(generic.ListView):
     model = Blog
-    # set the maximum number of items on a page.
-    paginate_by = 10
 
 class AuthorListView(generic.ListView):
     model = Author
-    paginate_by = 10
 
-```
-
-Now add the url paths in `blog/urls.py`. `views.BlogListView.as_view()` and `views.AuthorListView.as_view()` are the functions that will be called if a url matches. The `name` is an identifier for this mapping used in the template.
-
-```python
-urlpatterns = [
-    path("blogs/", views.BlogListView.as_view(), name="blogs"),
-    path("bloggers/", views.AuthorListView.as_view(), name="bloggers"),
-]
 ```
 
 The view function has a different format than before — that's because this view was implemented as a class and we are inheriting from an existing generic view function that already does most of what we want this view function to do, rather than writing our own from scratch. For Django class-based views we access an appropriate view function by calling the class method `as_view()`. This does all the work of creating an instance of the class, and making sure that the right handler methods are called for incoming HTTP requests.
@@ -65,13 +53,209 @@ In most cases, some parts of our website will present the same information so we
 
 The code snippet below shows how to use the extends template tag and override the content block. The generated HTML will include the code and structure defined in the base template, including the default content you defined in the title block, but the new content block in place of the default one.
 
+```html
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Local Library Home</h1>
+  <p>Welcome to LocalLibrary, a website developed by <em>Mozilla Developer Network</em>!</p>
+{% endblock %}
+```
+
+So now, let us use the above procedure to redesign our home page. First we create a `base_generic.html` template which will be extended by other templates.
+
+```html
+
+```
+
+What we have done here is to basically add a `sidebar` to our website so that users can access other pages from clicking on the links in the sidebar. For example `<li><a href="{% url 'index' %}">All Blogs</a></li>` creates a link `All Blogs` that leads to a page where all the blog posts on the website are shown. For now, all the links point to `index`. We will change that in later sections when we create the respective views.
+
+We can now update our `index.html` template to extend the `base_generic.html` template.
+
+```html
+{% extends "base_generic.html" %}
+{% block title %}
+<title>Tjosh's Blog</title>
+{% endblock %}
+{% block content %}
+<h1>Welcome to My blog</h1>
+<p>There are {{num_authors}} authors.</p>
+<p>There are {{num_blogs}} blogs.</p>
+<p>Enjoy!</p>
+{% endblock %}
+```
+
+See how much less code we needed to write for that. You can test the site now and see the image below.
+
+![base_extended](images/base_extended.png)
 
 ## Creating the List View template
 
+Now let us create the templates for `All Blogs` and `All Bloggers` views. Just like the `index.html` template, we extend the `base_generic.html` template. Since we used an inbuilt django class based view, the expected template names are `blog_list.html` and `author_list.html` respectively. Also the expected path for class based view templates should be `blog/templates/blog/blog_list.html` and `blog/templates/blog/author_list.html`.
+
+- For `All Blogs`, add the following in `blog/templates/blog/blog_list.html`:
+  
+```html
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>All Blogs</h1>
+{% if blog_list %}
+<ul>
+    {% for blog in blog_list %}
+    <li>
+        <a href="{{ blog.get_absolute_url}}">{{blog.title}}</a>
+        <p>{{blog.description}}</p>
+    </li>
+    {% endfor %}
+{% else %}
+<p>There are no blog posts in this blog.</p>
+{% endif %}
+</ul>
+{% endblock %}
+```
+
+- For `All Bloggers`, add the following in `blog/templates/blog/author_list.html`:
+
+```html
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Author List</h1>
+{% if author_list %}
+<ul>
+    {% for author in author_list %}
+    <li>
+        <a href="{{ author.get_absolute_url }}">{{ author }} </a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>There are no bloggers in this blog.</p>
+{% endif %}
+{% endblock %}
+```
+
+In templates above, we have used some additional tags such as the `if` statement and the `for` loop. These are explained below. As you are already familiar with this kind of execution in python, this is the way to perform the operation in a html template.
+
 ## Conditional execution
+
+We use the if, else, and endif template tags to check whether the `blog_list` has been defined and is not empty. If `blog_list` is empty, then the else clause displays text explaining that there are no blogs to list. If `blog_list` is not empty, then we iterate through the list of blogs.
+
+```html
+{% if blog_list %}
+  <!-- code here to list the blogs -->
+{% else %}
+  <p>There are no blog posts in this blog.</p>
+{% endif %}
+```
 
 ## For loops
 
+The template uses the `for` and `endfor` template tags to loop through the blog list, as shown below. Each iteration populates the blog template variable with information for the current list item.
+
+```html
+{% for blog in blog_list %}
+  <li> <!-- code here get information from each blog item --> </li>
+{% endfor %}
+```
+
 ## Accessing Variables
 
+The code inside the loop creates a list item for each blog that shows both the title (as a link to the yet-to-be-created detail view) and the author.
+
+```html
+<a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a> ({{blog.author}})
+```
+
+We access the fields of the associated blog record using the "dot notation" (e.g. blog.title and blog.author), where the text following the blog item is the field name (as defined in the model).
+
+We can also call functions in the model from within our template — in this case we call Blog.get_absolute_url() to get a URL you could use to display the associated detail record. This works provided the function does not have any arguments (there is no way to pass arguments!)
+
+## Update the urls and base template
+
+Open the base template (**/testsite/blog/templates/base_generic.html**) and insert url links, as shown below. This will enable the link in all pages.
+
+```html
+<li><a href="{% url 'index' %}">Home</a></li>
+<li><a href="{% url 'blogs' %}">All Blogs</a></li>
+<li><a href="{% url 'bloggers' %}">All Bloggers</a></li>
+```
+
+Now add the url paths in `blog/urls.py`. `views.BlogListView.as_view()` and `views.AuthorListView.as_view()` are the functions that will be called if a url matches. The `name` is an identifier for this mapping used in the template.
+
+```python
+urlpatterns = [
+    path("blogs/", views.BlogListView.as_view(), name="blogs"),
+    path("bloggers/", views.AuthorListView.as_view(), name="bloggers"),
+]
+```
+
+Note the relationship between the `urls` in the template and the name in the `urlpatterns`. That's right, they are the same.
+
+This will not work just yet, because we have not created the detailed view for blogs and bloggers. If you click the `sidebar` links, you will see an error like this:
+
+![no_blog_detail](images/no_blog_detail.png)
+
 ## Creating the Detail View template
+
+Next, let us create detail views and templates. The procedure is about the same as in creating list views above.
+
+- First, add the views in `blog/views.py`.
+  
+```python
+class BlogDetailView(generic.DetailView):
+    model = Blog
+
+class AuthorDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Author
+```
+
+- Create the templates in `blog/templates/blog/blog_detail.html` and `blog/templates/blog/author_detail.html` respectively.
+  - For `blog/templates/blog/blog_detail.html`.
+
+  ```html
+  {% extends "base_generic.html" %}
+
+  {% block content %}
+  <h1>{{ blog.title }}</h1>
+  <h4>{{ blog.author }} | <em>{{ blog.post_date }}</em> </h4>
+  <p>
+      {{ blog.body }}
+  </p>
+  {% endblock %}
+  ```
+
+  - For `blog/templates/blog/author_detail.html`.
+
+  ```html
+  {% extends "base_generic.html" %}
+
+  {% block content %}
+  <h1>{{ author.name }}</h1>
+  <p>
+      {{ author.bio }}
+  </p>
+  {% endblock %}
+  ```
+
+- Map the urls in `blog/urls.py`, add the following lines.
+
+```python
+from django.urls import re_path
+urlpatterns = [
+    ...
+    re_path(
+        r"^blogs/(?P<pk>\d+)$",
+        views.BlogDetailView.as_view(),
+        name="blog-detail",
+    ),
+    re_path(
+        r"^bloggers/(?P<pk>\d+)$",
+        views.AuthorDetailView.as_view(),
+        name="author-detail",
+    ),
+]
+```
+
+`re_path` stands for regular expressions path.
