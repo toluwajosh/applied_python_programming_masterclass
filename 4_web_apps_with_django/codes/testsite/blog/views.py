@@ -30,6 +30,7 @@ def index(request):
 class BlogListView(generic.ListView):
     model = Blog
     # set the maximum number of items on a page.
+    paginate_by = 2
 
 
 class AuthorListView(generic.ListView):

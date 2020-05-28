@@ -10,6 +10,8 @@ from django.urls import (
     reverse,  # used to generate url by reversing the URL patterns
 )
 
+from ckeditor.fields import RichTextField
+
 
 class Author(models.Model):
     """Model representing the author of blogs or comments"""
@@ -47,7 +49,7 @@ class Blog(models.Model):
     post_date = models.DateField(null=True, blank=True)
 
     # for longer text data types
-    body = models.TextField()
+    body = RichTextField() # update form normal modeld.TextField()
 
     def get_absolute_url(self):
         """Returns the url to access a blog"""
