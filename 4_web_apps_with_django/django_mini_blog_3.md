@@ -8,7 +8,7 @@ On our website, we will want only logged-in users to view the detail of the blog
 
 The authentication was enabled automatically when we first created the skeleton website, so you don't need to do anything more at this point.
 
-You can find the configurations in teh `INSTALLED_APPS` and ``MIDDLEWARE` sections of the project file (**`testsite/testsite/settings.py`**), as shown below.
+You can find the configurations in teh `INSTALLED_APPS` and `MIDDLEWARE` sections of the project file (**`testsite/testsite/settings.py`**), as shown below.
 
 ```python
 INSTALLED_APPS = [
@@ -41,17 +41,17 @@ urlpatterns += [
 ]
 ```
 
-Navigate to the http://127.0.0.1:8000/accounts/ URL (note the trailing forward slash!) and Django will show an error that it could not find this URL, and listing all the URLs it tried. From this you can see the URLs that will work, for example:
+Navigate to the http://127.0.0.1:8000/accounts/ URL (note the trailing forward slash!) and Django will show an error that it could not find this URL, and listing all the URLs it tried. From this you can see the URLs that will work:
 
 > Note: Using the above method adds the following URLs with names in square brackets, which can be used to reverse the URL mappings. You don't have to implement anything else — the above URL mapping automatically maps the below mentioned URLs.
-> 
+>
 >   accounts/ login/ [name='login']
     accounts/ logout/ [name='logout']
     accounts/ password_change/ [name='password_change']
     accounts/ password_change/done/ [name='password_change_done']
     accounts/ password_reset/ [name='password_reset']
     accounts/ password_reset/done/ [name='password_reset_done']
-    accounts/ reset/<uidb64>/<token>/ [name='password_reset_confirm']
+    accounts/ reset/<*uidb64*>/<*token*>/ [name='password_reset_confirm']
     accounts/ reset/done/ [name='password_reset_complete']
 
 Now we need to create a registration directory on the search path and then add the template files. Note that the authentication templates are expected to be in `testsite/templates/`. To make these directories visible to the template loader, we need to update the project settings (**`testsite/testsite/settings.py`**) as follows.
@@ -63,6 +63,8 @@ TEMPLATES = [
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         ...
+    }
+]
 ```
 
 ### Login template
@@ -125,11 +127,9 @@ Create and open `/testsite/templates/registration/logged_out.html`. Copy in the 
 {% endblock %}
 ```
 
-## Restrict views based on permision
+## Restrict views based on permission
 
-# TODO: reformat this part
-
-If you're using function-based views, the easiest way to restrict access to your functions is to apply the login_required decorator to your view function, as shown below. If the user is logged in then your view code will execute as normal. If the user is not logged in, this will redirect to the login URL defined in the project settings (settings.LOGIN_URL), passing the current absolute path as the next URL parameter. If the user succeeds in logging in then they will be returned back to this page, but this time authenticated.
+If you're using function-based views, the easiest way to restrict access to your functions is to apply the `login_required` decorator to your view function, as shown below. If the user is logged in then your view code will execute as normal. If the user is not logged in, this will redirect to the login URL defined in the project settings (settings.LOGIN_URL), passing the current absolute path as the next URL parameter. If the user succeeds in logging in then they will be returned back to this page, but this time authenticated.
 
 ```python
 from django.contrib.auth.decorators import login_required
@@ -139,9 +139,9 @@ def my_view(request):
     ...
 ```
 
-> **Python Decorator**:
+> **Python Decorator**: A decorator in Python is any callable Python object that is used to modify a function or a class. A reference to a function "func" or a class "C" is passed to a decorator and the decorator returns a modified function or class. The modified functions or classes usually contain calls to the original function "func" or class "C". In this case, the `login_required` decorator modifies our function to restrict un-authenticated users from accessing the view.
 
-Similarly, the easiest way to restrict access to logged-in users in your class-based views is to derive from LoginRequiredMixin. You need to declare this mixin first in the superclass list, before the main view class.
+Similarly, the easiest way to restrict access to logged-in users in your class-based views is to derive from [`LoginRequiredMixin`](https://docs.djangoproject.com/en/2.1/topics/auth/default/#the-loginrequired-mixin). You need to declare this mixin first in the superclass list, before the main view class.
 
 ```python
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -180,8 +180,24 @@ You can login with your `useruser` details. Now you will be able to view the pag
 
 ## Update sidebar to include authentications.
 
-## Rich Contents with ckEditor
+Just to indicate that a user is logged in we can add the following in the `base_generic.html` template:
+
+```html
+    ...
+    <li><a href="{% url 'bloggers' %}">All Bloggers</a></li>
+    <hr>
+    {% if user.is_authenticated %}
+    <li>User: {{user.get_username}}</li>
+    <li><a href="{% url 'logout' %}?next={{request.path}}">Logout</a></li>
+    {% else %}
+    <li><a href="{% url 'login' %}?next={{request.path}}">Login</a></li>
+    {% endif %}
+    <hr>
+```
+
+
 
 ## Bibliography
 
 1. MDN Web Docs, User authentication and permissions - https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Authentication
+2. Python Course, Python Decorator - https://www.python-course.eu/python3_decorators.php

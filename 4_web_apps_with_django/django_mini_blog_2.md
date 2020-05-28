@@ -300,4 +300,4 @@ It also captures all the digits **`(?P<pk>\d+)`** and passes them to the view in
 
 At this stage, we have successfully created a working website with blogs and bloggers. Users can also see a list detail of blogs and bloggers.
 
-In the next section, we will restrict some part our website to only logged-in users and add an extra package to allow us to post rich contents on our blog details page.
+In the next sections, we will restrict some part our website to only logged-in users and add extra packages to allow us to post rich contents on our blog details page.

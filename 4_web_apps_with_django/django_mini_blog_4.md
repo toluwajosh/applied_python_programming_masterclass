@@ -2,4 +2,4 @@
 
 ## Pagination
 
-## Users authentication
+## Rich Contents with ckEditor
