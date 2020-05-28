@@ -27,3 +27,8 @@ urlpatterns = [
     # we want the home path to be redirected to the blog home
     path("", RedirectView.as_view(url="blog/", permanent=True)),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls')),
+]

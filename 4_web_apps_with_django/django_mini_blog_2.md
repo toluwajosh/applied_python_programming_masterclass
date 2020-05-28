@@ -3,9 +3,9 @@
 Now that we have created a working but simplistic home page, we can now add more pages to achieve its purpose. We need;
 
 - A view to show all blogs - Blogs List.
-- A view to show all authors - Authors List.
+- A view to show all bloggers - Bloggers List.
 - A view to show each blog's detail - Blog Details.
-- A view to show each author's detail - Author Details.
+- A view to show each blogger's detail - Blogger Details.
 
 We can do this by using Django's generic class-based views which will also help to reduce the amount of code we have to write for common use cases. We'll also go into URL handling in greater detail, showing how to perform basic pattern matching.
 We are using a generic view because it already implements most of the functionality we need and follows Django best-practice, we will be able to create a more robust list view with less code, less repetition and ultimately less maintenance.
@@ -14,7 +14,7 @@ We are using a generic view because it already implements most of the functional
 
 ## Add List Views
 
-Open `blog/views.py`, and copy the following code into the bottom of the file:
+Open `blog/views.py`, and add the following code into the file:
 
 ```python
 from django.views import generic
@@ -34,7 +34,7 @@ The view function has a different format than before — that's because this vie
 
 ## Create a base generic template
 
-In most cases, some parts of our website will present the same information so we do not need to create a all-new template every time we are creating a view. We can create a base template and let other templates `extend` this `base_generic.html` template. So let us create a base generic template and update our `index.html` to use this base template.
+In most cases, some parts of our website will present the same information so we do not need to create an all-new template every time we are creating a view. We can create a base template and let other templates `extend` this `base_generic.html` template. So let us create a base generic template and update our `index.html` to use this base template.
 
 > Template `tags` are functions that you can use in a template to loop through lists, perform conditional operations based on the value of a variable, and so on. In addition to template tags, the template syntax allows you to reference variables that are passed into the template from the view, and use template filters to format variables (for example, to convert a string to lower case).
 
@@ -65,7 +65,43 @@ The code snippet below shows how to use the extends template tag and override th
 So now, let us use the above procedure to redesign our home page. First we create a `base_generic.html` template which will be extended by other templates.
 
 ```html
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    {% block title %}
+    <title>Tjosh Blog</title>
+    {% endblock %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- Add additional CSS in static file -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2">
+                {% block sidebar %}
+                <ul class="sidebar-nav">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'blogs' %}">All Blogs</a></li>
+                    <li><a href="{% url 'bloggers' %}">All Bloggers</a></li>
+                </ul>
+                {% endblock %}
+            </div>
+            <div class="col-sm-10">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
 ```
 
 What we have done here is to basically add a `sidebar` to our website so that users can access other pages from clicking on the links in the sidebar. For example `<li><a href="{% url 'index' %}">All Blogs</a></li>` creates a link `All Blogs` that leads to a page where all the blog posts on the website are shown. For now, all the links point to `index`. We will change that in later sections when we create the respective views.
@@ -136,11 +172,11 @@ Now let us create the templates for `All Blogs` and `All Bloggers` views. Just l
 {% endblock %}
 ```
 
-In templates above, we have used some additional tags such as the `if` statement and the `for` loop. These are explained below. As you are already familiar with this kind of execution in python, this is the way to perform the operation in a html template.
+In templates above, we have used some additional tags such as the `if` statement and the `for` loop. These are explained below. As you are already familiar with this kind of execution in python, this is the way to perform those operations in a html template.
 
 ## Conditional execution
 
-We use the if, else, and endif template tags to check whether the `blog_list` has been defined and is not empty. If `blog_list` is empty, then the else clause displays text explaining that there are no blogs to list. If `blog_list` is not empty, then we iterate through the list of blogs.
+We use the `if`, `else`, and `endif` template tags to check whether the `blog_list` has been defined and is not empty. If `blog_list` is empty, then the else clause displays text explaining that there are no blogs to list. If `blog_list` is not empty, then we iterate through the list of blogs.
 
 ```html
 {% if blog_list %}
@@ -170,11 +206,11 @@ The code inside the loop creates a list item for each blog that shows both the t
 
 We access the fields of the associated blog record using the "dot notation" (e.g. blog.title and blog.author), where the text following the blog item is the field name (as defined in the model).
 
-We can also call functions in the model from within our template — in this case we call Blog.get_absolute_url() to get a URL you could use to display the associated detail record. This works provided the function does not have any arguments (there is no way to pass arguments!)
+We can also call functions in the model from within our template — in this case we call` Blog.get_absolute_url()` to get a URL you could use to display the associated detail record. This works provided the function does not have any arguments (there is no way to pass arguments!)
 
 ## Update the urls and base template
 
-Open the base template (**/testsite/blog/templates/base_generic.html**) and insert url links, as shown below. This will enable the link in all pages.
+Open the base template (**/testsite/blog/templates/base_generic.html**) and add url links, as shown below. This will enable the link in all pages.
 
 ```html
 <li><a href="{% url 'index' %}">Home</a></li>
@@ -182,7 +218,7 @@ Open the base template (**/testsite/blog/templates/base_generic.html**) and inse
 <li><a href="{% url 'bloggers' %}">All Bloggers</a></li>
 ```
 
-Now add the url paths in `blog/urls.py`. `views.BlogListView.as_view()` and `views.AuthorListView.as_view()` are the functions that will be called if a url matches. The `name` is an identifier for this mapping used in the template.
+Now add the url paths in `blog/urls.py`. `views.BlogListView.as_view()` and `views.AuthorListView.as_view()` are the functions that will be called if a url matches.
 
 ```python
 urlpatterns = [
@@ -191,7 +227,7 @@ urlpatterns = [
 ]
 ```
 
-Note the relationship between the `urls` in the template and the name in the `urlpatterns`. That's right, they are the same.
+Note the relationship between the `url` in the template and the name in the `urlpatterns`. That's right, they are the same.
 
 This will not work just yet, because we have not created the detailed view for blogs and bloggers. If you click the `sidebar` links, you will see an error like this:
 
@@ -207,7 +243,7 @@ Next, let us create detail views and templates. The procedure is about the same 
 class BlogDetailView(generic.DetailView):
     model = Blog
 
-class AuthorDetailView(LoginRequiredMixin, generic.DetailView):
+class AuthorDetailView(generic.DetailView):
     model = Author
 ```
 
@@ -258,4 +294,10 @@ urlpatterns = [
 ]
 ```
 
-`re_path` stands for regular expressions path.
+The `re_path()` function is a more refined filtering (compared to `path()`) for strings that have a certain number of characters. It makes use of [Regular expressions](https://docs.python.org/3/library/re.html), which are incredibly powerful pattern mapping tool. The expresion used above - `(?P<pk>\d+)$`, matches a string that has `blog/` at the start of the line (`^blog/`), then has one or more digits (`\d+`), and then ends (with no non-digit characters before the end of line marker).
+
+It also captures all the digits **`(?P<pk>\d+)`** and passes them to the view in a parameter named `pk`. The captured values are always passed as a string. For example, this would match `blog/1234` , and send a variable `pk='1234'` to the view.
+
+At this stage, we have successfully created a working website with blogs and bloggers. Users can also see a list detail of blogs and bloggers.
+
+In the next section, we will restrict some part our website to only logged-in users and add an extra package to allow us to post rich contents on our blog details page.

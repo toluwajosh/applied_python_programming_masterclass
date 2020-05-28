@@ -3,6 +3,7 @@ from django.views import generic
 
 # Create your views here.
 from blog.models import Author, Blog, BlogComment
+from django.contrib.auth.mixins import LoginRequiredMixin # for class based views
 
 
 def index(request):
@@ -32,4 +33,11 @@ class BlogListView(generic.ListView):
 
 
 class AuthorListView(generic.ListView):
+    model = Author
+
+
+class BlogDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Blog
+
+class AuthorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Author
