@@ -1,6 +1,6 @@
 # Django Mini Blog, Part 1
 
-In this section, we are going to create a Mini Blog using the Djanog framework.
+In this section, we are going to create a Mini Blog using the Django framework.
 Our blog will have 3 main pages namely,
 
 - the Home page,
@@ -55,8 +55,8 @@ Because we are using SQLite, we don't need to do any further setup here. Let's m
 
 ## Set the url mapper
 
-Hook up the URL mapper, inside the project `url.py` and app `url.py`.
-To do this, create `url.py` file in the `blog` directory, then add the following lines in the project `url.py`. Since our website only has the blog app for now, we will make our blog the home page of the website.;
+Hook up the URL mapper, inside the project `urls.py` and app `urls.py`.
+To do this, create `urls.py` file in the `blog` directory, then add the following lines in the project `urls.py`. Since our website only has the blog app for now, we will make our blog the home page of the website.;
 
 ```python
 from django.urls import path, include
@@ -287,7 +287,7 @@ Follow the prompt to choose a username and password. Once this is done, you can 
 
 You should see something like this after signing in;
 
-![django_admin_home](django_admin_home.png)
+![django_admin_home](images/django_admin_home.png)
 
 Here, you can see the models that we have created. You can go ahead and check around in each models. Also fill in some dummy data that we can use to verify our website. We already have one `User` which is you, so create and extra one that you can assign a blog. Make sure to have about two blogs and at least on comment for each blog.
 
@@ -338,4 +338,4 @@ Save all files, and navigate to http://127.0.0.1:8000/blog, then you should see 
 
 ![home_page_1](images/home_page_1.png)
 
-It is not exciting yet, but we are just getting started.
+It is not exciting yet, but we are just getting started. In the next section, we will learn how to add more views (or pages) to our website and work with the database.
