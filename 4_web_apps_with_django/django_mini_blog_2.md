@@ -88,8 +88,8 @@ So now, let us use the above procedure to redesign our home page. First we creat
                 {% block sidebar %}
                 <ul class="sidebar-nav">
                     <li><a href="{% url 'index' %}">Home</a></li>
-                    <li><a href="{% url 'blogs' %}">All Blogs</a></li>
-                    <li><a href="{% url 'bloggers' %}">All Bloggers</a></li>
+                    <li><a href="{% url 'index' %}">All Blogs</a></li>
+                    <li><a href="{% url 'index' %}">All Bloggers</a></li>
                 </ul>
                 {% endblock %}
             </div>
