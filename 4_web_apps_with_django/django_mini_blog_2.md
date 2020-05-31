@@ -7,7 +7,7 @@ Now that we have created a working but simplistic home page, we can now add more
 - A view to show each blog's detail - Blog Details.
 - A view to show each blogger's detail - Blogger Details.
 
-We can do this by using Django's generic class-based views which will also help to reduce the amount of code we have to write for common use cases. We'll also go into URL handling in greater detail, showing how to perform basic pattern matching.
+We can do this by using **Django's generic class-based views** which will also help to reduce the amount of code we have to write for common use cases. We'll also go into URL handling in greater detail, showing how to perform basic pattern matching.
 We are using a generic view because it already implements most of the functionality we need and follows Django best-practice, we will be able to create a more robust list view with less code, less repetition and ultimately less maintenance.
 
 > Check out [Built-in class-based generic views](https://docs.djangoproject.com/en/2.1/topics/class-based-views/generic-display/) (Django docs) for many more examples of what you can do.
@@ -28,6 +28,15 @@ class BlogListView(generic.ListView):
 class AuthorListView(generic.ListView):
     model = Author
 
+```
+
+Now add the url paths in `blog/urls.py`. `views.BlogListView.as_view()` and `views.AuthorListView.as_view()` are the functions that will be called if a url matches.
+
+```python
+urlpatterns = [
+    path("blogs/", views.BlogListView.as_view(), name="blogs"),
+    path("bloggers/", views.AuthorListView.as_view(), name="bloggers"),
+]
 ```
 
 The view function has a different format than before — that's because this view was implemented as a class and we are inheriting from an existing generic view function that already does most of what we want this view function to do, rather than writing our own from scratch. For Django class-based views we access an appropriate view function by calling the class method `as_view()`. This does all the work of creating an instance of the class, and making sure that the right handler methods are called for incoming HTTP requests.
@@ -218,7 +227,7 @@ Open the base template (**/testsite/blog/templates/base_generic.html**) and add 
 <li><a href="{% url 'bloggers' %}">All Bloggers</a></li>
 ```
 
-Now add the url paths in `blog/urls.py`. `views.BlogListView.as_view()` and `views.AuthorListView.as_view()` are the functions that will be called if a url matches.
+Note the relationship between the `url` in the template and the name in the `urlpatterns`.
 
 ```python
 urlpatterns = [
@@ -227,7 +236,7 @@ urlpatterns = [
 ]
 ```
 
-Note the relationship between the `url` in the template and the name in the `urlpatterns`. That's right, they are the same.
+That's right, they are the same.
 
 This will not work just yet, because we have not created the detailed view for blogs and bloggers. If you click the `sidebar` links, you will see an error like this:
 
@@ -246,6 +255,29 @@ class BlogDetailView(generic.DetailView):
 class AuthorDetailView(generic.DetailView):
     model = Author
 ```
+
+- Map the urls in `blog/urls.py`, add the following lines.
+
+```python
+from django.urls import re_path
+urlpatterns = [
+    ...
+    re_path(
+        r"^blogs/(?P<pk>\d+)$",
+        views.BlogDetailView.as_view(),
+        name="blog-detail",
+    ),
+    re_path(
+        r"^bloggers/(?P<pk>\d+)$",
+        views.AuthorDetailView.as_view(),
+        name="author-detail",
+    ),
+]
+```
+
+The `re_path()` function is a more refined filtering (compared to `path()`) for strings that have a certain number of characters. It makes use of [Regular expressions](https://docs.python.org/3/library/re.html), which are incredibly powerful pattern mapping tool. The expresion used above - `(?P<pk>\d+)$`, matches a string that has `blog/` at the start of the line (`^blog/`), then has one or more digits (`\d+`), and then ends (with no non-digit characters before the end of line marker).
+
+It also captures all the digits **`(?P<pk>\d+)`** and passes them to the view in a parameter named `pk`. The captured values are always passed as a string. For example, this would match `blog/1234` , and send a variable `pk='1234'` to the view.
 
 - Create the templates in `blog/templates/blog/blog_detail.html` and `blog/templates/blog/author_detail.html` respectively.
   - For `blog/templates/blog/blog_detail.html`.
@@ -274,29 +306,6 @@ class AuthorDetailView(generic.DetailView):
   </p>
   {% endblock %}
   ```
-
-- Map the urls in `blog/urls.py`, add the following lines.
-
-```python
-from django.urls import re_path
-urlpatterns = [
-    ...
-    re_path(
-        r"^blogs/(?P<pk>\d+)$",
-        views.BlogDetailView.as_view(),
-        name="blog-detail",
-    ),
-    re_path(
-        r"^bloggers/(?P<pk>\d+)$",
-        views.AuthorDetailView.as_view(),
-        name="author-detail",
-    ),
-]
-```
-
-The `re_path()` function is a more refined filtering (compared to `path()`) for strings that have a certain number of characters. It makes use of [Regular expressions](https://docs.python.org/3/library/re.html), which are incredibly powerful pattern mapping tool. The expresion used above - `(?P<pk>\d+)$`, matches a string that has `blog/` at the start of the line (`^blog/`), then has one or more digits (`\d+`), and then ends (with no non-digit characters before the end of line marker).
-
-It also captures all the digits **`(?P<pk>\d+)`** and passes them to the view in a parameter named `pk`. The captured values are always passed as a string. For example, this would match `blog/1234` , and send a variable `pk='1234'` to the view.
 
 At this stage, we have successfully created a working website with blogs and bloggers. Users can also see a list detail of blogs and bloggers.
 
